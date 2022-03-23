@@ -19,6 +19,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	//This works
 	
 	public static void main(String[] args) {
 		launch(args);
