@@ -18,7 +18,8 @@ public abstract class Shapes {
 	/**
 	 * 
 	 * creates a general polygon that has an x and y
-	 * in the pane space that can be translated
+	 * in the pane space
+	 * that can be translated (i.e. move the shape)
 	 * 
 	 * 
 	 */
@@ -29,6 +30,9 @@ public abstract class Shapes {
 		this.moveShape = new Point2D(0.,0.);
 	}
 	
+	public Polygon getShape() {
+		return shape;
+	}
 	
 	
 	
