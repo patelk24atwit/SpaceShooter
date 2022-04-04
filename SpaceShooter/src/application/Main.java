@@ -24,13 +24,18 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		// creates the main window
 		window = primaryStage;
-		Pane background = new Pane();
-		background.setPrefSize(600, 500);
-		background.setStyle("-fx-background-color: black;");
-		Scene scene = new Scene(background);
-		window.setScene(scene);
-		window.setTitle("Asteroids Game");
+		
+		Scenes scene = new Scenes(window, "Kush");
+		Scene main = scene.Main();
+		
+		window.setScene(main);
 		window.show();
+		
+//		Pane background = new Pane();
+//		background.setPrefSize(800, 600);
+//		background.setStyle("-fx-background-color: grey;");
+//		Scene scene = new Scene(background);
+	
 	}
 	
 	
