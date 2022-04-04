@@ -6,14 +6,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 
 public class Main extends Application {
 	
 	Stage window;
-	Scene scene1, scene2;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -21,34 +22,16 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		// creates the main window
 		window = primaryStage;
-		
-		//button1 
-		
-		Button button1 = new Button("Click to Scene 2");
-		button1.setOnAction(e -> window.setScene(scene2));
-		
-		//Layout 1 - 
-		
-		StackPane layout1 = new StackPane();
-		layout1.getChildren().addAll(button1);
-		scene1 = new Scene(layout1, 500, 300);
-		
-		//button 2
-		Button button2 = new Button("This scene 2 go to Scene 1");
-		button2.setOnAction(e -> window.setScene(scene1));
-		
-		
-		//layout 2
-		
-		StackPane layout2 = new StackPane();
-		layout2.getChildren().addAll(button2);
-		scene2 = new Scene(layout2, 500, 300);
-		
-		window.setScene(scene1);
-		window.setTitle("Scene1");
+		Pane background = new Pane();
+		background.setPrefSize(600, 500);
+		background.setStyle("-fx-background-color: black;");
+		Scene scene = new Scene(background);
+		window.setScene(scene);
+		window.setTitle("Asteroids Game");
 		window.show();
 	}
-	//This works
+	
 	
 }
