@@ -1,5 +1,6 @@
 package application;
 
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
@@ -37,19 +38,20 @@ public abstract class Shapes {
 	
 	public void rightTurn() {
 		// rotate shape -60 degrees about an anchor point at (50,30)
-		this.shape.getTransforms().add(new Rotate(90, 50, 30));
+		//this.shape.getTransforms().add(new Rotate(90, 50, 30));
+		this.shape.setRotate(this.shape.getRotate()-5);
 	}
 	
 	public void leftTurn() {
 		// rotate shape 60 degrees about an anchor point at (50,30)
-		this.shape.getTransforms().add(new Rotate(-90, 50, 30));
+		//this.shape.getTransforms().add(new Rotate(-90, 50, 30));
+		this.shape.setRotate(this.shape.getRotate()+5);
 	}
 	
 	public void move() {
         this.shape.setTranslateX(this.shape.getTranslateX() + this.moveShape.getX());
         this.shape.setTranslateY(this.shape.getTranslateY() + this.moveShape.getY());
 	}
-	
 	
 	
 }
