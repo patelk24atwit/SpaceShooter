@@ -25,11 +25,11 @@ public class Main extends Application {
 		// creates the main window
 		window = primaryStage;
 		
-		Scenes scene = new Scenes(window, "Kush");
+		Scenes scene = new Scenes(window);
 		Scene main = scene.Main();
-		
 		window.setScene(main);
 		window.show();
+	
 		
 //		Pane background = new Pane();
 //		background.setPrefSize(800, 600);
