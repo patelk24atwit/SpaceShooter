@@ -2,6 +2,7 @@ package application;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,10 +25,18 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		// creates the main window
 		window = primaryStage;
+		Pane pane = new Pane();
+		pane.setPrefSize(500, 600);
 		
-		Scenes scene = new Scenes(window);
-		Scene main = scene.Main();
-		window.setScene(main);
+		Asteroid test = new Asteroid(100,100);
+		pane.getChildren().add(test.getShape());
+		
+		test.rightTurn();
+		test.leftTurn();
+		test.move();
+		
+		Scene scene = new Scene (pane);
+		window.setScene(scene);
 		window.show();
 	
 		
