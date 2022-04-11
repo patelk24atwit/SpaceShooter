@@ -1,7 +1,12 @@
 package application;
 	
+import java.time.Duration;
+
+import javafx.animation.PathTransition;
+import javafx.animation.PathTransition.OrientationType;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,6 +16,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 
 
 public class Main extends Application {
@@ -29,11 +38,26 @@ public class Main extends Application {
 		pane.setPrefSize(500, 600);
 		
 		Asteroid test = new Asteroid(100,100);
-		pane.getChildren().add(test.getShape());
+		Spaceship shipTest = new Spaceship(300, 100);
+		pane.getChildren().addAll(test.getShape(), shipTest.getShape());
 		
-		test.rightTurn();
-		test.leftTurn();
-		test.move();
+		pane.setOnKeyPressed(e -> {
+			switch (e.getCode()) {
+			case A: 
+				shipTest.leftTurn();
+				break;
+			
+			case D:
+				shipTest.rightTurn();
+				break;
+			}
+		
+		});
+			
+		
+//		test.rightTurn();
+//		test.leftTurn();
+//		test.move();
 		
 		Scene scene = new Scene (pane);
 		window.setScene(scene);

@@ -36,10 +36,14 @@ public abstract class Shapes {
 		return shape;
 	}
 	
+	
 	public void rightTurn() {
 		// rotate shape -60 degrees about an anchor point at (50,30)
 		//this.shape.getTransforms().add(new Rotate(90, 50, 30));
+		
 		this.shape.setRotate(this.shape.getRotate()-5);
+		
+		
 	}
 	
 	public void leftTurn() {
@@ -53,5 +57,15 @@ public abstract class Shapes {
         this.shape.setTranslateY(this.shape.getTranslateY() + this.moveShape.getY());
 	}
 	
-	
+	/**
+	 * allows shapes to change velocity through game (i.e. so asteroids can float or so the ship
+	 * can change direction
+	 */
+	 public void changeVelocity() {
+	        double changeX = .04*Math.cos(Math.toRadians(this.shape.getRotate()));
+	        double changeY = .04*Math.sin(Math.toRadians(this.shape.getRotate()));
+
+	        this.moveShape = this.moveShape.add(changeX, changeY);
+	    }
+	 
 }

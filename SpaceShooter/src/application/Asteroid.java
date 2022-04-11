@@ -11,6 +11,8 @@ public class Asteroid extends Shapes {
 		super(new Polygon(25, -25, 25, 25, -25, 25, -25, -25, 25), x, y);
 	}
 	
+	
+	
 	// how to handle collision between ship and asteroid
 	public boolean collision(Polygon temp) {
 		return false;
