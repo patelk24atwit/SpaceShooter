@@ -37,28 +37,6 @@ public class Main extends Application {
 		Pane pane = new Pane();
 		pane.setPrefSize(500, 600);
 		
-		Asteroid test = new Asteroid(100,100);
-		Spaceship shipTest = new Spaceship(300, 100);
-		pane.getChildren().addAll(test.getShape(), shipTest.getShape());
-		
-		pane.setOnKeyPressed(e -> {
-			switch (e.getCode()) {
-			case A: 
-				shipTest.leftTurn();
-				break;
-			
-			case D:
-				shipTest.rightTurn();
-				break;
-			}
-		
-		});
-			
-		
-//		test.rightTurn();
-//		test.leftTurn();
-//		test.move();
-		
 		Scene scene = new Scene (pane);
 		window.setScene(scene);
 		window.show();
