@@ -13,7 +13,7 @@ public class Spaceship extends Characters{
 	    }
 
 	    private void ship() {
-
+	    	// temporary image
 	        var shipImg = "https://png.pngtree.com/png-clipart/20210323/our"
 	        		+ "large/pngtree-ufo-space-ship-alien-clip-art-png-image_3103337.jpg";
 	        var ii = new ImageIcon(shipImg);
