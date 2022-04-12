@@ -29,8 +29,8 @@ public class Spaceship extends Characters{
 	    }
 
 	    public void movement() {
-
 	        x += dx;
+	        y += dy;
 
 	        if (x <= 2) {
 	            x = 2;
@@ -39,35 +39,60 @@ public class Spaceship extends Characters{
 	        if (x >= 400 - 2 * width) {
 	            x = 400 - 2 * width;
 	        }
+	        
+	        if (y <= 2) {
+	            y = 2;
+	        }
+
+	        if (y >= 400 - 2 * width) {
+	            y = 400 - 2 * width;
+	        }
 	    }
 
+	    
+	    
 	    public void keyPressed(KeyEvent e) {
 
 	        int key = e.getKeyCode();
 
-	        if (key == KeyEvent.VK_LEFT) {
-	            dx = -2;
+	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
+	            dx = -3;
 	        }
 
-	        if (key == KeyEvent.VK_RIGHT) {
-	            dx = 2;
+	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+	            dx = 3;
 	        }
+	        
+	        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
+	        	dy = 3;
+	        }
+	        
+	        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+	        	dy = -3;
+	        } 
 	    }
 
 	    public void keyReleased(KeyEvent e) {
 
 	        int key = e.getKeyCode();
 
-	        if (key == KeyEvent.VK_LEFT) {
-
+	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
 	            dx = 0;
 	        }
 
-	        if (key == KeyEvent.VK_RIGHT) {
-
+	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
 	            dx = 0;
+	        }
+	        
+	        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
+	        	dy = 0;
+	        }
+	        
+	        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+	        	dy = 0;
 	        }
 	    }
+	    
 }
 	
 	

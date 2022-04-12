@@ -22,6 +22,7 @@ public abstract class Characters {
     int x;
     int y;
     int dx;
+    int dy;
 
     public Characters() {
 
