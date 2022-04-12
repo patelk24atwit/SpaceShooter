@@ -36,16 +36,16 @@ public class Spaceship extends Characters{
 	            x = 2;
 	        }
 
-	        if (x >= 400 - 2 * width) {
-	            x = 400 - 2 * width;
+	        if (x >= 800 - 2 * width) {
+	            x = 600 - 2 * width;
 	        }
 	        
 	        if (y <= 2) {
 	            y = 2;
 	        }
 
-	        if (y >= 400 - 2 * width) {
-	            y = 400 - 2 * width;
+	        if (y >= 800 - 2 * width) {
+	            y = 600 - 2 * width;
 	        }
 	    }
 
