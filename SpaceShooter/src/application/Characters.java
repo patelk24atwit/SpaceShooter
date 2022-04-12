@@ -9,9 +9,8 @@ import javafx.scene.transform.Rotate;
 
 /**
  * 
- * this is an abstract class used to define the movements 
- * of the general shapes in the game
- * it supercedes the asteroid and spaceship class
+ * this is an abstract class used to define the 
+ * general characters in the game
  *
  */
 public abstract class Characters {
