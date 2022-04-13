@@ -28,7 +28,7 @@ public class Spaceship extends Characters{
 	        setY(START_Y);
 	    }
 
-	    public void movement() {
+	    public void shipMovement() {
 	        x += dx;
 	        y += dy;
 
