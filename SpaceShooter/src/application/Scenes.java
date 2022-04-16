@@ -172,8 +172,8 @@ public class Scenes {
 		//skin1
 		skin1.setPrefHeight(100);
 		skin1.setPrefWidth(200);
-		skin1.setLayoutX();
-		skin1.setLayoutY();
+//		skin1.setLayoutX();
+//		skin1.setLayoutY();
 		
 		//skin2
 		skin2.setPrefHeight(100);
