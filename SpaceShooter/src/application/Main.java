@@ -25,25 +25,26 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		// creates the main window
 		window = primaryStage;
-		Pane pane = new Pane();
-		pane.setPrefSize(500, 600);
 		
-		Asteroid test = new Asteroid(100,100);
-		pane.getChildren().add(test.getShape());
+//		Pane pane = new Pane();
+//		pane.setPrefSize(500, 600);
+//		
+//		Asteroid test = new Asteroid(100,100);
+//		pane.getChildren().add(test.getShape());
+//		
+//		test.rightTurn();
+//		test.leftTurn();
+//		test.move();
+//		
+//		Scene scene = new Scene (pane);
+//		window.setScene(scene);
+//		window.show();
 		
-		test.rightTurn();
-		test.leftTurn();
-		test.move();
+		Scenes main = new Scenes(window);
 		
-		Scene scene = new Scene (pane);
-		window.setScene(scene);
+		window.setScene(main.Main());
 		window.show();
 	
-		
-//		Pane background = new Pane();
-//		background.setPrefSize(800, 600);
-//		background.setStyle("-fx-background-color: grey;");
-//		Scene scene = new Scene(background);
 	
 	}
 	
