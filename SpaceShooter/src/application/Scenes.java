@@ -167,7 +167,7 @@ public class Scenes {
 			window.setScene(newScene);
 			window.setTitle("Start");
 			window.show();
-			//This is 
+			//This 
 			//es
 			
 		});
