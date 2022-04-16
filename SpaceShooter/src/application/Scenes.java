@@ -168,7 +168,7 @@ public class Scenes {
 			window.setTitle("Start");
 			window.show();
 			//This 
-			//es
+			//e
 			
 		});
 		//skin1
