@@ -5,10 +5,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Paths;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.swing.JOptionPane;
 
 import javafx.application.Application;
 import javafx.geometry.HPos;
