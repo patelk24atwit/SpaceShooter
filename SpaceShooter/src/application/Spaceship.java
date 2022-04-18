@@ -63,13 +63,15 @@ public class Spaceship extends Characters{
 	            dx = 3;
 	        }
 	        
-	        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-	        	dy = 3;
-	        }
+	        System.out.println("keypressed works");
 	        
-	        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-	        	dy = -3;
-	        } 
+//	        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
+//	        	dy = 3;
+//	        }
+//	        
+//	        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+//	        	dy = -3;
+//	        } 
 	    }
 
 	    public void keyReleased(KeyEvent e) {
@@ -84,13 +86,15 @@ public class Spaceship extends Characters{
 	            dx = 0;
 	        }
 	        
-	        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-	        	dy = 0;
-	        }
+	        System.out.println("key released works");
 	        
-	        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-	        	dy = 0;
-	        }
+//	        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
+//	        	dy = 0;
+//	        }
+//	        
+//	        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+//	        	dy = 0;
+//	        }
 	    }
 	    
 }

@@ -32,13 +32,16 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class Scenes {
+public class Scenes extends Main{
 	
 	public Stage window;
 	public Scene scene;
 	private static int width = 800;
 	private static int height = 600;
 	public boolean play = false;
+	public boolean Ind_One = false;
+	public boolean Ind_two = false;
+	public boolean Ind_tre = false;
 	public ImageView view = new ImageView("game.jpg"); 
 	public ImageView view2 = new ImageView("game2.jpg");
 	public String MEDIA = "music.wav";
@@ -98,6 +101,10 @@ public class Scenes {
 		sta.setOnAction(e -> {
 		
 			Scene StartScene = Start();
+			
+			runGame();
+			
+			
 			window.setScene(StartScene);
 			window.setTitle("Running");
 			window.show();
@@ -145,6 +152,11 @@ public class Scenes {
 		Button skin2 = new Button();
 		Button skin3 = new Button();
 		
+		Label sone = new Label();
+		Label stwo = new Label();
+		Label stre = new Label();
+
+		
 		//Play/Pause
 		pla.setPrefHeight(75);
 		pla.setPrefWidth(100);
@@ -179,6 +191,8 @@ public class Scenes {
 			
 		});
 		
+
+		
 		//Back button
 		bac.setText("Back");
 		bac.setLayoutX(690);
@@ -201,17 +215,35 @@ public class Scenes {
 		//skin1
 		
 			//Image of the ship
-		Image ship1 = new Image("default.png", 200, 100, true, true);
+		Image ship1 = new Image("default.png", 195, 95, true, true);
 		ImageView skin1view = new ImageView(ship1);
 		skin1.setGraphic(skin1view);
 		
+			//Indicator
+		sone.setPrefHeight(1);
+		sone.setPrefWidth(50);
+		sone.setLayoutX(150);
+		sone.setLayoutY(410);
+		
+		if(Ind_One == false) {
+			
+			sone.setOpacity(0);
+			
+		} 
+		else {
+			
+			sone.setOpacity(1);
+			sone.setStyle("-fx-background-color: red;");
+		}
+				
 			//height and x and y coords //Dont change
 		skin1.setPrefHeight(100);
 		skin1.setPrefWidth(200);
 		skin1.setLayoutX(75);
 		skin1.setLayoutY(300);
-		
+	
 		skin1.setOnAction(e -> {
+			
 			
 			
 		});
@@ -256,7 +288,7 @@ public class Scenes {
 		
 		
 		
-		main.getChildren().addAll(view2, pla, bac, skin1, skin2, skin3);
+		main.getChildren().addAll(view2, pla, bac, skin1, skin2, skin3, sone);
 		Scene scene = new Scene(main);
 		return scene;
 	}
@@ -283,6 +315,10 @@ public class Scenes {
 		}
 			
 		
+	}
+	
+	public void runGame() {
+		Game_Logic runSpaceShooters = new Game_Logic();
 	}
 
 }
