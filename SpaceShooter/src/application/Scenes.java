@@ -144,9 +144,12 @@ public class Scenes extends Main{
 		});
 		
 		// add characters image///////////////////////////////////////////////////////////////////////////
-		Spaceship player = new Spaceship(); 
+		Spaceship player = new Spaceship(200, 100); 
+		Asteroid asteroid = new Asteroid(500, 400);
+		ImageView drawPlayer = player.getGraphic();
+		ImageView drawAsteroid = asteroid.getGraphic();
 		
-		main.getChildren().addAll(bac);
+		main.getChildren().addAll(bac, drawPlayer, drawAsteroid);
 		
 		
 		

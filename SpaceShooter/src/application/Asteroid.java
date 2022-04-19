@@ -8,23 +8,31 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polygon;
 
 public class Asteroid extends Characters {
-	private int width;
-	private boolean destroyed;
+	public double width;
+	public boolean destroyed;
+	Image astImg = new Image("https://www.seekpng.com/png/detail/216-2168369_"
+			+ "pixel-asteroid-png-jpg-pixel-art-deadpool-logo.png");
+	public Asteroid asteroid = new Asteroid(500,400);
 	
 	public Asteroid (int x, int y) {
 		asteroid(x, y);
+		asteroid.setX(this.x);
+		asteroid.setY(this.y);
+	}
+	
+	public Asteroid() {
 	}
 	
 	public void asteroid(int x, int y) {
 		this.x = x;
 		this.y = y;
 		
-		var astImg = "https://www.seekpng.com/png/detail/216-2168369_"
-				+ "pixel-asteroid-png-jpg-pixel-art-deadpool-logo.png";
-		var ast = new ImageIcon(astImg);
+		setImage(astImg);
+		ImageView astGraphic = new ImageView(getImage());
+		setGraphic(astGraphic);
 		
-		width = ast.getImage().getWidth(null);
-        setImage(ast.getImage());
+		//width = asteroid.getImage().getWidth();
+        
 
         // y stays same
         // x should be a random number within the bounds of the game stage

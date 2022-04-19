@@ -3,7 +3,15 @@ package application;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Spaceship extends Characters{
+	
+	public Spaceship player;
+	public Image ii = new Image("https://png.pngtree.com/png-clipart/20210323/our"
+    		+ "large/pngtree-ufo-space-ship-alien-clip-art-png-image_3103337.jpg");
+	
 	// add a draw get graphic method to return character imageview
 	// then in main, add that imageview to the root group
 	// do same with background map 
@@ -21,49 +29,55 @@ public class Spaceship extends Characters{
 	// pressing upkey charnges move vector to -1 or 1
 	// movement vector 1 = right
 	
-	   private int width;
+	   private double width;
 
-	    public Spaceship() {
-
+	    public Spaceship(int x,  int y) {
+//	    	player.setX(this.x);
+//	    	player.setY(this.y);
 	        ship();
 	    }
+	    
+	    public Spaceship() {
+	    }
 
-	    private void ship() {
+	    public void ship() {
 	    	// temporary image
-	        var shipImg = "https://png.pngtree.com/png-clipart/20210323/our"
-	        		+ "large/pngtree-ufo-space-ship-alien-clip-art-png-image_3103337.jpg";
-	        var ii = new ImageIcon(shipImg);
+	    	
+	    	setImage(ii);
+	    	ImageView iiGraph = new ImageView(getImage());
+	    	setGraphic(iiGraph);
+	    	
+	    	
+	        //width = player.getImage().getWidth();
 
-	        width = ii.getImage().getWidth(null);
-	        setImage(ii.getImage());
-
-	        int START_X = 200;
+	        // starting coordinates for where image generates
+	        int START_X = 400;
 	        setX(START_X);
 
-	        int START_Y = 220;
+	        int START_Y = 150;
 	        setY(START_Y);
 	    }
 
-	    public void shipMovement() {
-	        x += dx;
-	        y += dy;
-
-	        if (x <= 2) {
-	            x = 2;
-	        }
-
-	        if (x >= 800 - 2 * width) {
-	            x = 600 - 2 * width;
-	        }
-	        
-	        if (y <= 2) {
-	            y = 2;
-	        }
-
-	        if (y >= 800 - 2 * width) {
-	            y = 600 - 2 * width;
-	        }
-	    }
+//	    public void shipMovement() {
+//	        x += dx;
+//	        y += dy;
+//
+//	        if (x <= 2) {
+//	            x = 2;
+//	        }
+//
+//	        if (x >= 800 - 2 * width) {
+//	            x = 600 - 2 * width;
+//	        }
+//	        
+//	        if (y <= 2) {
+//	            y = 2;
+//	        }
+//
+//	        if (y >= 800 - 2 * width) {
+//	            y = 600 - 2 * width;
+//	        }
+//	    }
 
 	    
 	    

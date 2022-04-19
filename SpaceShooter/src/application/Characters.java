@@ -1,9 +1,11 @@
 package application;
 
-import java.awt.Image;
+//import java.awt.Image;
+import javafx.scene.image.Image;
 
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Point2D;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 
@@ -15,9 +17,11 @@ import javafx.scene.transform.Rotate;
  */
 public abstract class Characters {
 	
-	private boolean visible;
-    private Image image;
-    private boolean dying;
+	public boolean visible;
+    public Image image;
+    public boolean dying;
+    public ImageView graphic;
+    
 
     int x;
     int y;
@@ -45,13 +49,11 @@ public abstract class Characters {
     }
 
     public void setImage(Image image) {
-
         this.image = image;
     }
 
     public Image getImage() {
-
-        return image;
+        return this.image;
     }
 
     public void setX(int x) {
@@ -82,5 +84,13 @@ public abstract class Characters {
     public boolean isDying() {
 
         return this.dying;
+    }
+    
+    public void setGraphic(ImageView graphic) {
+    	this.graphic = graphic;
+    }
+    
+    public ImageView getGraphic() {
+    	return graphic;
     }
 }

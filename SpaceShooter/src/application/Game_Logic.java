@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Game_Logic{
 	
 	public Asteroid asteroids = new Asteroid(150,150);
-	public Spaceship player = new Spaceship();
+	public Spaceship player = new Spaceship(200, 100);
 	public Shot shot = new Shot();
 	
 	public Random rand = new Random();
