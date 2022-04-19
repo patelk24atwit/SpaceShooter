@@ -37,7 +37,7 @@ public class Asteroid extends Characters {
 	}
 	
 	public void astMovement(int direct) {
-		this.y += direct;
+		this.y -= direct;
 	}
 	
 	public void setAstDestroyed(boolean destroyed) {

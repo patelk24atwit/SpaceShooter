@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream; 
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -14,6 +15,7 @@ import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -33,6 +35,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class Scenes extends Main{
+	
+	// everything needs a draw function
+	// keep calling the draw functions in a loop
+	// in main game logic, create event handler and timeline to keep running event hand
+	
 	
 	public Stage window;
 	public Scene scene;
@@ -99,12 +106,10 @@ public class Scenes extends Main{
 		sta.setLayoutX(350);
 		sta.setLayoutY(300);
 		sta.setOnAction(e -> {
-		
+		//////////////////////////////////////////////////////////////////////////////////////////
 			Scene StartScene = Start();
 			
-			runGame();
-			
-			
+     	////////////////////////////////////////////////////////////////////////////////////////////
 			window.setScene(StartScene);
 			window.setTitle("Running");
 			window.show();
@@ -118,9 +123,12 @@ public class Scenes extends Main{
 	}
 	
 	//Game
+	// this is what happens after you click start
+	// run timeline loop in here? (game logic goes here)
 	public Scene Start () {
 		
 		Button bac = new Button();
+		
 
 		Pane main = new Pane();
 		main.setPrefSize(width, height);
@@ -135,7 +143,13 @@ public class Scenes extends Main{
 			window.show();
 		});
 		
+		// add characters image///////////////////////////////////////////////////////////////////////////
+		Spaceship player = new Spaceship(); 
+		
 		main.getChildren().addAll(bac);
+		
+		
+		
 		Scene scene = new Scene(main);
 		return scene;
 	}
@@ -317,9 +331,9 @@ public class Scenes extends Main{
 		
 	}
 	
-	public void runGame() {
-		Game_Logic runSpaceShooters = new Game_Logic();
-	}
+//	public void runGame() {
+//		Game_Logic runSpaceShooters = new Game_Logic();
+//	}
 
 }
 

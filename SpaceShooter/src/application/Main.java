@@ -28,34 +28,15 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+		
 	}
 	
 	@Override
 	public void start(Stage primaryStage) {
 		// creates the main window
 		window = primaryStage;
-		
-//		Pane pane = new Pane();
-//		pane.setPrefSize(500, 600);
-//		
-//		Asteroid test = new Asteroid(100,100);
-//		pane.getChildren().add(test.getShape());
-//		
-//		test.rightTurn();
-//		test.leftTurn();
-//		test.move();
-//		
-//		Scene scene = new Scene (pane);
-//		window.setScene(scene);
-//		window.show();
-		
 		Scenes main = new Scenes(window);
-		
 		window.setScene(main.Main());
 		window.show();
-	
-	
 	}
-	
-	
 }
