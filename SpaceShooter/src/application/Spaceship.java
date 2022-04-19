@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 
 public class Spaceship extends Characters{
 	
-	public Spaceship player;
 	public Image ii = new Image("https://png.pngtree.com/png-clipart/20210323/our"
     		+ "large/pngtree-ufo-space-ship-alien-clip-art-png-image_3103337.jpg");
 	
@@ -32,8 +31,8 @@ public class Spaceship extends Characters{
 	   private double width;
 
 	    public Spaceship(int x,  int y) {
-//	    	player.setX(this.x);
-//	    	player.setY(this.y);
+	    	setX(this.x);
+	    	setY(this.y);
 	        ship();
 	    }
 	    
@@ -42,11 +41,11 @@ public class Spaceship extends Characters{
 
 	    public void ship() {
 	    	// temporary image
-	    	
+	
 	    	setImage(ii);
 	    	ImageView iiGraph = new ImageView(getImage());
 	    	setGraphic(iiGraph);
-	    	
+	    	getGraphic();
 	    	
 	        //width = player.getImage().getWidth();
 

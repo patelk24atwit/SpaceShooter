@@ -12,12 +12,12 @@ public class Asteroid extends Characters {
 	public boolean destroyed;
 	Image astImg = new Image("https://www.seekpng.com/png/detail/216-2168369_"
 			+ "pixel-asteroid-png-jpg-pixel-art-deadpool-logo.png");
-	public Asteroid asteroid = new Asteroid(500,400);
+	
 	
 	public Asteroid (int x, int y) {
 		asteroid(x, y);
-		asteroid.setX(this.x);
-		asteroid.setY(this.y);
+		setX(this.x);
+		setY(this.y);
 	}
 	
 	public Asteroid() {

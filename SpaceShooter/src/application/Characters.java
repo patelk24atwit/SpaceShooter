@@ -29,12 +29,10 @@ public abstract class Characters {
     int dy;
 
     public Characters() {
-
         visible = true;
     }
 
     public void die() {
-
         visible = false;
     }
 
