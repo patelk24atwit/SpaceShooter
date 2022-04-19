@@ -15,6 +15,7 @@ public class Shot extends Characters{
 	public Shot (int x, int y) {
 		setX(this.x);
 		setY(this.y);
+		setVisible(true);
 	}
 	
 	public void playerShot(int x, int y) {
