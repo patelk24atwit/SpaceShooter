@@ -41,7 +41,6 @@ public class Spaceship extends Characters{
 
 	    public void ship() {
 	    	// temporary image
-	
 	    	setImage(ii);
 	    	ImageView iiGraph = new ImageView(getImage());
 	    	setGraphic(iiGraph);
