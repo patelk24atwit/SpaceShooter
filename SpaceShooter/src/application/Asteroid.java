@@ -12,8 +12,7 @@ import javafx.scene.shape.Polygon;
 public class Asteroid extends Characters {
 	public double width;
 	public boolean destroyed;
-	Image astImg = new Image("https://www.seekpng.com/png/detail/216-2168369_"
-			+ "pixel-asteroid-png-jpg-pixel-art-deadpool-logo.png");
+	Image astImg = new Image("asteriod.jpg");
 	
 	public int dy = -1; //dy represents the change in y movement
 	public final int FALL = 6;
@@ -39,9 +38,9 @@ public class Asteroid extends Characters {
 		//width = asteroid.getImage().getWidth();
       
         // x should be a random number within the bounds of the game stage
-		Random rand = new Random();
-		int n = rand.nextInt(50, 750);
-        setX(n);
+//		Random rand = new Random();
+//		int n = rand.nextInt(50, 750);
+//        setX(n);
 
         int START_Y = 550;
         setY(START_Y);
