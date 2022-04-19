@@ -22,13 +22,6 @@ public class Spaceship extends Characters{
 	// draw function calculates new x and y position and setting that to the graphic
 	// graphic is the imageview
 	
-	// constant speed variable
-	// movement vector, 2 int array (x,y)
-	// private double movementVector
-	// movementVector starts as 0; 
-	// pressing upkey charnges move vector to -1 or 1
-	// movement vector 1 = right
-	
 	   private double width;
 
 	    public Spaceship(int x,  int y) {

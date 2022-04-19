@@ -38,9 +38,9 @@ public class Asteroid extends Characters {
 		//width = asteroid.getImage().getWidth();
       
         // x should be a random number within the bounds of the game stage
-//		Random rand = new Random();
-//		int n = rand.nextInt(50, 750);
-//        setX(n);
+		Random rand = new Random();
+		int n = rand.nextInt(50, 750);
+        setX(n);
 
         int START_Y = 550;
         setY(START_Y);

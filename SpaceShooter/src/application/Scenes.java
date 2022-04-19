@@ -138,7 +138,7 @@ public class Scenes extends Main{
 			window.show();
 		});
 		
-		// add characters image///////////////////////////////////////////////////////////////////////////
+		// add characters image/////////////////////
 		Spaceship player = new Spaceship(200, 100); 
 		Asteroid asteroid = new Asteroid(500, 400);
 		ImageView drawPlayer = player.getGraphic();

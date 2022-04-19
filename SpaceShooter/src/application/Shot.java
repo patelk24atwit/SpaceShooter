@@ -23,11 +23,11 @@ public class Shot extends Characters{
 		ImageView shotGraphic = new ImageView(getImage());
 		setGraphic(shotGraphic);
 
-        int horizontal = 6;
-        setX(x + horizontal);
-
-        int vertical = 1;
-        setY(y - vertical);
+//        int horizontal = 6;
+//        setX(x + horizontal);
+//
+//        int vertical = 1;
+//        setY(y - vertical);
 	}
 
 }
