@@ -106,10 +106,7 @@ public class Scenes extends Main{
 		sta.setLayoutX(350);
 		sta.setLayoutY(300);
 		sta.setOnAction(e -> {
-		//////////////////////////////////////////////////////////////////////////////////////////
 			Scene StartScene = Start();
-			
-     	////////////////////////////////////////////////////////////////////////////////////////////
 			window.setScene(StartScene);
 			window.setTitle("Running");
 			window.show();
@@ -126,10 +123,8 @@ public class Scenes extends Main{
 	// this is what happens after you click start
 	// run timeline loop in here? (game logic goes here)
 	public Scene Start () {
-		
 		Button bac = new Button();
 		
-
 		Pane main = new Pane();
 		main.setPrefSize(width, height);
 		main.setStyle("-fx-background-color: white;");
@@ -151,8 +146,11 @@ public class Scenes extends Main{
 		
 		main.getChildren().addAll(bac, drawPlayer, drawAsteroid);
 		
+		/////////////////////// EVENTHANDLER
 		
+		//EventHandler<> spaceGame = new EventHandler<>;
 		
+		/////////////////////// EVENTHANDLER
 		Scene scene = new Scene(main);
 		return scene;
 	}

@@ -73,37 +73,26 @@ public class Spaceship extends Characters{
 	    }
 	    
 	    public void keyPressed(KeyEvent e) {
-
 	        int key = e.getKeyCode();
 
 	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
 	            dx = -1;
 	        }
-
 	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
 	            dx = 1;
 	        }
-	        
-	        System.out.println("keypressed works");
-	        
 	    }
 
 	    public void keyReleased(KeyEvent e) {
-
 	        int key = e.getKeyCode();
 
 	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
 	            dx = 0;
 	        }
-
 	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
 	            dx = 0;
-	        }
-	        
-	        System.out.println("key released works");
-	        
-	    }
-	    
+	        } 
+	    } 
 }
 	
 	
