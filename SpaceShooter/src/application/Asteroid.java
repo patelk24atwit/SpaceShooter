@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 
 import javafx.animation.AnimationTimer;
@@ -12,6 +14,9 @@ public class Asteroid extends Characters {
 	public boolean destroyed;
 	Image astImg = new Image("https://www.seekpng.com/png/detail/216-2168369_"
 			+ "pixel-asteroid-png-jpg-pixel-art-deadpool-logo.png");
+	
+	public int dy = -1; //dy represents the change in y movement
+	public final int FALL = 6;
 	
 	
 	public Asteroid (int x, int y) {
@@ -32,20 +37,18 @@ public class Asteroid extends Characters {
 		setGraphic(astGraphic);
 		
 		//width = asteroid.getImage().getWidth();
-        
-
-        // y stays same
+      
         // x should be a random number within the bounds of the game stage
-        // 0 - 800
-        int START_X = 200;
-        setX(START_X);
+		Random rand = new Random();
+		int n = rand.nextInt(50, 750);
+        setX(n);
 
-        int START_Y = 400;
+        int START_Y = 550;
         setY(START_Y);
 	}
 	
-	public void astMovement(int direct) {
-		this.y -= direct;
+	public void astMovement() {
+		setY(getY()*dy*FALL);
 	}
 	
 	public void setAstDestroyed(boolean destroyed) {

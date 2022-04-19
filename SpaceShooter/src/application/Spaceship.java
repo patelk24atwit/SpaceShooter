@@ -10,6 +10,8 @@ public class Spaceship extends Characters{
 	
 	public Image ii = new Image("https://png.pngtree.com/png-clipart/20210323/our"
     		+ "large/pngtree-ufo-space-ship-alien-clip-art-png-image_3103337.jpg");
+	int dx=0; // dx represents the change in the x movement
+	final int SPEED = 5;
 	
 	// add a draw get graphic method to return character imageview
 	// then in main, add that imageview to the root group
@@ -54,52 +56,36 @@ public class Spaceship extends Characters{
 
 	        int START_Y = 150;
 	        setY(START_Y);
-	    }
-
-//	    public void shipMovement() {
-//	        x += dx;
-//	        y += dy;
-//
-//	        if (x <= 2) {
-//	            x = 2;
-//	        }
-//
-//	        if (x >= 800 - 2 * width) {
-//	            x = 600 - 2 * width;
-//	        }
-//	        
-//	        if (y <= 2) {
-//	            y = 2;
-//	        }
-//
-//	        if (y >= 800 - 2 * width) {
-//	            y = 600 - 2 * width;
-//	        }
-//	    }
-
+	    }   
 	    
+	    public void shipMovement(KeyEvent ex) {
+	    	int key = ex.getKeyCode();
+	    	
+	    	int left = dx*SPEED;
+	    	int right = dx*SPEED;
+	    	
+	    	 if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
+		            setX(getX()*left);
+		     }
+		     if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+		            setX(getX()*right);
+		     }  
+	    }
 	    
 	    public void keyPressed(KeyEvent e) {
 
 	        int key = e.getKeyCode();
 
 	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-	            dx = -3;
+	            dx = -1;
 	        }
 
 	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-	            dx = 3;
+	            dx = 1;
 	        }
 	        
 	        System.out.println("keypressed works");
 	        
-//	        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-//	        	dy = 3;
-//	        }
-//	        
-//	        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-//	        	dy = -3;
-//	        } 
 	    }
 
 	    public void keyReleased(KeyEvent e) {
@@ -116,13 +102,6 @@ public class Spaceship extends Characters{
 	        
 	        System.out.println("key released works");
 	        
-//	        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-//	        	dy = 0;
-//	        }
-//	        
-//	        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-//	        	dy = 0;
-//	        }
 	    }
 	    
 }
