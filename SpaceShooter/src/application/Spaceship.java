@@ -8,8 +8,7 @@ import javafx.scene.image.ImageView;
 
 public class Spaceship extends Characters{
 	
-	public Image ii = new Image("https://png.pngtree.com/png-clipart/20210323/our"
-    		+ "large/pngtree-ufo-space-ship-alien-clip-art-png-image_3103337.jpg");
+	public Image ii = new Image("defaultShip.png");
 	int dx=0; // dx represents the change in the x movement
 	final int SPEED = 5;
 	
