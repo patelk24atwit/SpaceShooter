@@ -1,6 +1,7 @@
 package application;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.ImageIcon;
 
@@ -37,8 +38,7 @@ public class Asteroid extends Characters {
 		//width = asteroid.getImage().getWidth();
       
         // x should be a random number within the bounds of the game stage
-		Random rand = new Random();
-		int n = rand.nextInt(50, 750);
+		int n = ThreadLocalRandom.current().nextInt(50, 750 + 1);
         setX(n);
         graphic.setX(n);
 
