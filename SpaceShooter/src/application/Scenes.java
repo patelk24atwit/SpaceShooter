@@ -44,12 +44,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class Scenes extends Main{
-	
-	// everything needs a draw function
-	// keep calling the draw functions in a loop
-	// in main game logic, create event handler and timeline to keep running event hand
-	
-	
 	public Stage window;
 	public Scene scene;
 	private static int width = 800;
@@ -63,13 +57,9 @@ public class Scenes extends Main{
 	public String MEDIA = "music.wav";
 	
 
-	
-
 	public Scenes(Stage window) {
 		
 		this.window = window;
-		
-		//
 		window.setTitle("Start");
 		window.setResizable(false);
 		
@@ -121,7 +111,6 @@ public class Scenes extends Main{
 			window.show();
 		});
 	
-    
 	main.getChildren().addAll(view, sta, gea);
 	Scene scene = new Scene(main);
 	
@@ -130,7 +119,6 @@ public class Scenes extends Main{
 	
 	//Game
 	// this is what happens after you click start
-	// run timeline loop in here? (game logic goes here)
 	public Scene Start () {
 		Button bac = new Button();
 		
@@ -147,76 +135,71 @@ public class Scenes extends Main{
 			window.show();
 		});
 		
-		// add characters image/////////////////////
+		
 		Spaceship player = new Spaceship(200, 100); 
-		Asteroid asteroid = new Asteroid();
-		ImageView drawPlayer = player.getGraphic();
+
+		main.getChildren().add(player.getGraphic());
 		
-		
-		main.getChildren().addAll(bac, drawPlayer);
-		
-		/////////////////////// EVENTHANDLER
-		ArrayList<Asteroid> asteroidList = new ArrayList<Asteroid>();
-		ArrayList<Shot> bulletStorage = new ArrayList<Shot>();
-		
-		EventHandler<KeyEvent> playerShootHandler = new EventHandler<KeyEvent>() {
-		    	
-	        	@Override
-	        	public void handle(KeyEvent arg0) {
-	        		KeyCode keyPressed = arg0.getCode();
-	        		switch(keyPressed) {
-        			
-        			case SPACE:
-        				Shot bullet = new Shot(player.getX(), player.getY());
-        				bulletStorage.add(bullet);
-        				break;
-        				//t
-	        		}
-	        	}
-		 };
-	       
+		/////////////////////////////////////////////////////////////////////////////////// EVENTHANDLER
+		ArrayList<Asteroid> asteroidListSlow = new ArrayList<Asteroid>();
+		ArrayList<Asteroid> asteroidListFast = new ArrayList<Asteroid>();
 		
 		EventHandler<ActionEvent> spaceGame = new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent arg0) {
-				//System.out.println("hi");
-				player.draw();
+			
+				player.drawShip();
 				
-				for (Shot bullet : bulletStorage) {
-					bullet.draw();
+				for (Shot bullet : player.bulletStorage) {
+					main.getChildren().add(bullet.getGraphic()); // ask jaden how to draw bullets
+					bullet.drawBullet();
 				}
 				
-				for (Asteroid ast : asteroidList) {
-					ast.draw();
+				for (Asteroid ast : asteroidListSlow) {
+					ast.drawSlowAst();
+				}
+				
+				for (Asteroid ast : asteroidListFast) {
+					ast.drawFastAst();
 				}
 				
 			}
 		};
 		
-		EventHandler<ActionEvent> spawnAsteroid = new EventHandler<ActionEvent>() {
+		EventHandler<ActionEvent> spawnSlowAsteroid = new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent arg0) {
 				Asteroid ast = new Asteroid();
-				ImageView drawAsteroid = ast.getGraphic();
-				asteroidList.add(ast);
-				main.getChildren().add(drawAsteroid);
+				asteroidListSlow.add(ast);
+				main.getChildren().add(ast.getGraphic());
 			}
 		};
 		
-		Timeline spawnT = new Timeline(new KeyFrame(Duration.millis(3000), spawnAsteroid));
-		spawnT.setCycleCount(Timeline.INDEFINITE);
-		spawnT.play();
+		EventHandler<ActionEvent> spawnFastAsteroid = new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				Asteroid ast1 = new Asteroid();
+				asteroidListFast.add(ast1);
+				main.getChildren().add(ast1.getGraphic());
+			}
+		};
+		
+		Timeline spawnSA = new Timeline(new KeyFrame(Duration.millis(2000), spawnSlowAsteroid));
+		spawnSA.setCycleCount(Timeline.INDEFINITE);
+		spawnSA.play();
+		
+		Timeline spawnFA = new Timeline(new KeyFrame(Duration.millis(4500), spawnFastAsteroid));
+		spawnFA.setCycleCount(Timeline.INDEFINITE);
+		spawnFA.play();
 		
 		Timeline t = new Timeline(new KeyFrame(Duration.millis(32), spaceGame));
 		t.setCycleCount(Timeline.INDEFINITE);
 		t.play();
+		///////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		/////////////////////// EVENTHANDLER
-		// make a list of all bullets and asteroids
-		// loop through that and call their draw methods
-		// takes care of movement
 		Scene scene = new Scene(main);
 		scene.setOnKeyPressed(player.playerKeyHandler);
 		scene.setOnKeyReleased(player.playerKeyStopHandler);
@@ -298,7 +281,7 @@ public class Scenes extends Main{
 		//skin1
 		
 			//Image of the ship
-		Image ship1 = new Image("default.png", 195, 95, true, true);
+		Image ship1 = new Image("defaultShip.png", 195, 95, true, true);
 		ImageView skin1view = new ImageView(ship1);
 		skin1.setGraphic(skin1view);
 		

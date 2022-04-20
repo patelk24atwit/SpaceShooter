@@ -13,22 +13,10 @@ import javafx.scene.input.KeyEvent;
 public class Spaceship extends Characters{
 	
 	public Image ii = new Image("defaultShip.png");
-//	int dx=0; // dx represents the change in the x movement
-//	final int SPEED = 5;
 	
-	// add a draw get graphic method to return character imageview
-	// then in main, add that imageview to the root group
-	// do same with background map 
-	// do same for other shots / characters / asteroids
-	
-	// then set up inifinite draw loop (use TimeLine)
-	// and call draw functions
-	// draw function calculates new x and y position and setting that to the graphic
-	// graphic is the imageview
-	
-	   private double width;
 	   public EventHandler<KeyEvent> playerKeyHandler;
 	   public EventHandler<KeyEvent> playerKeyStopHandler;
+	   public ArrayList<Shot> bulletStorage = new ArrayList<Shot>();
 	   
 
 	    public Spaceship(int x,  int y) {
@@ -40,15 +28,10 @@ public class Spaceship extends Characters{
 		    	
 	        	@Override
 	        	public void handle(KeyEvent arg0) {
-	        		System.out.println("key pressed");
 	        		KeyCode keyPressed = arg0.getCode();
-//	        		if (keyPressed == KeyCode.SPACE) {
-//	        			if (!visible) {
-//	        				shoot();
-//	        			}
+
 	        		switch(keyPressed) {
 	        			case A:
-	        				System.out.println("RIGHT PRESSED");
 	        				dx = -1;
 	        				break; 
 	        			case D:
@@ -60,7 +43,9 @@ public class Spaceship extends Characters{
 	        			case S:
 	        				dy = 1;
 	        				break;
-	        		
+	        			case SPACE:
+	        				shoot();
+	        				break;
 	        		
 	        		}
 	        	}
@@ -92,8 +77,7 @@ public class Spaceship extends Characters{
 	        				dy = 0;
 	        				break;
 	        			case SPACE:
-	        				dy=0;
-	        				dx=0;
+	        				break;
 	        		}
 	        	}
 	        	
@@ -105,19 +89,28 @@ public class Spaceship extends Characters{
 	    }
 
 	    public void ship() {
-	    	// temporary image
 	    	setImage(ii);
 	    	ImageView iiGraph = new ImageView(getImage());
 	    	setGraphic(iiGraph);
-	    	getGraphic();
-	    	
-	        //width = player.getImage().getWidth();
 
 	        // starting coordinates for where image generates
 	        int START_X = 400;
 	        setX(START_X);
 
-	        int START_Y = 150;	
+	        int START_Y = 500;	
 	        setY(START_Y);
-	    }   
+	    }  
+	    
+	    public void drawShip() {
+	    	x += dx*SPEED;
+	    	y += dy*SPEED;
+	    	
+	    	this.getGraphic().setX(x);
+	    	this.getGraphic().setY(y);
+	    }
+	    
+	    public void shoot() {
+	    	Shot bullet = new Shot(this.getX(), this.getY());
+	    	bulletStorage.add(bullet);
+	    }
 }

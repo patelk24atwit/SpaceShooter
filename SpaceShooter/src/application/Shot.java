@@ -19,22 +19,21 @@ public class Shot extends Characters{
 	public Shot (int x, int y) {
 		setX(this.x);
 		setY(this.y);
-		//t
 		setVisible(true);
+		playerShot(x,y);
+		
+		dy = -1;
 	}
 	
 	public void playerShot(int x, int y) {
 		setImage(shotImg);
 		ImageView shotGraphic = new ImageView(getImage());
 		setGraphic(shotGraphic);
-		
-		dy = -1;
-
-//        int horizontal = 6;
-//        setX(x + horizontal);
-//
-//        int vertical = 1;
-//        setY(y - vertical);
+	}
+	
+	public void drawBullet() {
+		y += dy*6;
+		this.getGraphic().setY(y);
 	}
 
 }

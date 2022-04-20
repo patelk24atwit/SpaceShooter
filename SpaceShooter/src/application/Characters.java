@@ -21,8 +21,8 @@ public abstract class Characters {
     public Image image;
     public boolean dying;
     public ImageView graphic;
-    public int SPEED = 5;
-    public int FALL = 6;
+    public int SPEED = 6;
+    public int FALL = 5;
     
     int dx = 0;
     int dy = 0;
@@ -40,12 +40,10 @@ public abstract class Characters {
     }
 
     public boolean isVisible() {
-
         return visible;
     }
 
     protected void setVisible(boolean visible) {
-
         this.visible = visible;
     }
 
@@ -58,34 +56,26 @@ public abstract class Characters {
     }
 
     public void setX(int x) {
-
         this.x = x;
-        
     }
 
     public void setY(int y) {
-
         this.y = y;
-      
     }
 
     public int getY() {
-
         return y;
     }
 
     public int getX() {
-
         return x;
     }
 
     public void setDying(boolean dying) {
-
         this.dying = dying;
     }
 
     public boolean isDying() {
-
         return this.dying;
     }
     
@@ -97,12 +87,4 @@ public abstract class Characters {
     	return graphic;
     }
     
-    public void draw() {
-    	x += dx*SPEED;
-    	//System.out.println(dx);
-    	y += dy*FALL;
-    	
-    	graphic.setX(x);
-    	graphic.setY(y);
-    }
 }
