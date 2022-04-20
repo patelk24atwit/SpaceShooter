@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 
 import javafx.event.EventHandler;
@@ -27,6 +29,7 @@ public class Spaceship extends Characters{
 	   private double width;
 	   public EventHandler<KeyEvent> playerKeyHandler;
 	   public EventHandler<KeyEvent> playerKeyStopHandler;
+	   
 
 	    public Spaceship(int x,  int y) {
 	    	setX(this.x);
@@ -58,6 +61,7 @@ public class Spaceship extends Characters{
 	        				dy = 1;
 	        				break;
 	        		
+	        		
 	        		}
 	        	}
 	        	
@@ -87,7 +91,9 @@ public class Spaceship extends Characters{
 	        			case S:
 	        				dy = 0;
 	        				break;
-	        		
+	        			case SPACE:
+	        				dy=0;
+	        				dx=0;
 	        		}
 	        	}
 	        	
@@ -114,47 +120,4 @@ public class Spaceship extends Characters{
 	        int START_Y = 150;	
 	        setY(START_Y);
 	    }   
-	    
-//	    public void shipMovement(KeyEvent ex) {
-//	    	int key = ex.getKeyCode();
-//	    	
-//	    	int left = dx*SPEED;
-//	    	int right = dx*SPEED;
-//	    	
-//	    	 if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-//		            setX(getX()*left);
-//		     }
-//		     if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-//		            setX(getX()*right);
-//		     }  
-//	    }
-//	    
-	    
-	    
-//	    
-//	    public void keyPressed(KeyEvent e) {
-//	        int key = e.getKeyCode();
-//
-//	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-//	            dx = -1;
-//	        }
-//	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-//	            dx = 1;
-//	        }
-//	    }
-//
-//	    public void keyReleased(KeyEvent e) {
-//	        int key = e.getKeyCode();
-//
-//	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-//	            dx = 0;
-//	        }
-//	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-//	            dx = 0;
-//	        } 
-//	    } 
-	    
 }
-	
-	
-

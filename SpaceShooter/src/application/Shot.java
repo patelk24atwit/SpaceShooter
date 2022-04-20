@@ -26,6 +26,8 @@ public class Shot extends Characters{
 		setImage(shotImg);
 		ImageView shotGraphic = new ImageView(getImage());
 		setGraphic(shotGraphic);
+		
+		dy = -1;
 
 //        int horizontal = 6;
 //        setX(x + horizontal);

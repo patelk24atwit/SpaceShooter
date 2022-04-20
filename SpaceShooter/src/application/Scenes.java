@@ -29,6 +29,8 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -155,6 +157,23 @@ public class Scenes extends Main{
 		
 		/////////////////////// EVENTHANDLER
 		ArrayList<Asteroid> asteroidList = new ArrayList<Asteroid>();
+		ArrayList<Shot> bulletStorage = new ArrayList<Shot>();
+		
+		EventHandler<KeyEvent> playerShootHandler = new EventHandler<KeyEvent>() {
+		    	
+	        	@Override
+	        	public void handle(KeyEvent arg0) {
+	        		KeyCode keyPressed = arg0.getCode();
+	        		switch(keyPressed) {
+        			
+        			case SPACE:
+        				Shot bullet = new Shot(player.getX(), player.getY());
+        				bulletStorage.add(bullet);
+        				break;
+	        		}
+	        	}
+		 };
+	       
 		
 		EventHandler<ActionEvent> spaceGame = new EventHandler<ActionEvent>() {
 			
@@ -163,9 +182,14 @@ public class Scenes extends Main{
 				//System.out.println("hi");
 				player.draw();
 				
+				for (Shot bullet : bulletStorage) {
+					bullet.draw();
+				}
+				
 				for (Asteroid ast : asteroidList) {
 					ast.draw();
 				}
+				
 			}
 		};
 		
