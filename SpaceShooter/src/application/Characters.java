@@ -21,7 +21,11 @@ public abstract class Characters {
     public Image image;
     public boolean dying;
     public ImageView graphic;
+    public int SPEED = 5;
+    public int FALL = 6;
     
+    int dx = 0;
+    int dy = 0;
 
     int x;
     int y;
@@ -56,11 +60,13 @@ public abstract class Characters {
     public void setX(int x) {
 
         this.x = x;
+        
     }
 
     public void setY(int y) {
 
         this.y = y;
+      
     }
 
     public int getY() {
@@ -89,5 +95,14 @@ public abstract class Characters {
     
     public ImageView getGraphic() {
     	return graphic;
+    }
+    
+    public void draw() {
+    	x += dx*SPEED;
+    	//System.out.println(dx);
+    	y += dy*FALL;
+    	
+    	graphic.setX(x);
+    	graphic.setY(y);
     }
 }

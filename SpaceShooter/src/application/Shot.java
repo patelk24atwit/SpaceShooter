@@ -2,6 +2,10 @@ package application;
 
 import javax.swing.ImageIcon;
 
+// every time create instance of shot, store in an arraylist
+// loop through array list continuously updating movement vectors
+// to draw shot frame-by-frame
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

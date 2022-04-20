@@ -1,16 +1,18 @@
 package application;
 
-import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class Spaceship extends Characters{
 	
 	public Image ii = new Image("defaultShip.png");
-	int dx=0; // dx represents the change in the x movement
-	final int SPEED = 5;
+//	int dx=0; // dx represents the change in the x movement
+//	final int SPEED = 5;
 	
 	// add a draw get graphic method to return character imageview
 	// then in main, add that imageview to the root group
@@ -23,11 +25,74 @@ public class Spaceship extends Characters{
 	// graphic is the imageview
 	
 	   private double width;
+	   public EventHandler<KeyEvent> playerKeyHandler;
+	   public EventHandler<KeyEvent> playerKeyStopHandler;
 
 	    public Spaceship(int x,  int y) {
 	    	setX(this.x);
 	    	setY(this.y);
 	        ship();
+	        
+	        playerKeyHandler = new EventHandler<KeyEvent>() {
+		    	
+	        	@Override
+	        	public void handle(KeyEvent arg0) {
+	        		System.out.println("key pressed");
+	        		KeyCode keyPressed = arg0.getCode();
+//	        		if (keyPressed == KeyCode.SPACE) {
+//	        			if (!visible) {
+//	        				shoot();
+//	        			}
+	        		switch(keyPressed) {
+	        			case A:
+	        				System.out.println("RIGHT PRESSED");
+	        				dx = -1;
+	        				break; 
+	        			case D:
+	        				dx = 1;
+	        				break;
+	        			case W:
+	        				dy = -1;
+	        				break;
+	        			case S:
+	        				dy = 1;
+	        				break;
+	        		
+	        		}
+	        	}
+	        	
+		    };
+		    
+		    playerKeyStopHandler = new EventHandler<KeyEvent>() {
+		    	
+	        	@Override
+	        	public void handle(KeyEvent arg0) {
+	        		System.out.println("key pressed");
+	        		KeyCode keyPressed = arg0.getCode();
+//	        		if (keyPressed == KeyCode.SPACE) {
+//	        			if (!visible) {
+//	        				shoot();
+//	        			}
+	        		switch(keyPressed) {
+	        			case A:
+	        				System.out.println("RIGHT PRESSED");
+	        				dx = 0;
+	        				break; 
+	        			case D:
+	        				dx = 0;
+	        				break;
+	        			case W:
+	        				dy = 0;
+	        				break;
+	        			case S:
+	        				dy = 0;
+	        				break;
+	        		
+	        		}
+	        	}
+	        	
+		    };
+	        
 	    }
 	    
 	    public Spaceship() {
@@ -46,45 +111,49 @@ public class Spaceship extends Characters{
 	        int START_X = 400;
 	        setX(START_X);
 
-	        int START_Y = 150;
+	        int START_Y = 150;	
 	        setY(START_Y);
 	    }   
 	    
-	    public void shipMovement(KeyEvent ex) {
-	    	int key = ex.getKeyCode();
-	    	
-	    	int left = dx*SPEED;
-	    	int right = dx*SPEED;
-	    	
-	    	 if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-		            setX(getX()*left);
-		     }
-		     if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-		            setX(getX()*right);
-		     }  
-	    }
+//	    public void shipMovement(KeyEvent ex) {
+//	    	int key = ex.getKeyCode();
+//	    	
+//	    	int left = dx*SPEED;
+//	    	int right = dx*SPEED;
+//	    	
+//	    	 if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
+//		            setX(getX()*left);
+//		     }
+//		     if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+//		            setX(getX()*right);
+//		     }  
+//	    }
+//	    
 	    
-	    public void keyPressed(KeyEvent e) {
-	        int key = e.getKeyCode();
-
-	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-	            dx = -1;
-	        }
-	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-	            dx = 1;
-	        }
-	    }
-
-	    public void keyReleased(KeyEvent e) {
-	        int key = e.getKeyCode();
-
-	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-	            dx = 0;
-	        }
-	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-	            dx = 0;
-	        } 
-	    } 
+	    
+//	    
+//	    public void keyPressed(KeyEvent e) {
+//	        int key = e.getKeyCode();
+//
+//	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
+//	            dx = -1;
+//	        }
+//	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+//	            dx = 1;
+//	        }
+//	    }
+//
+//	    public void keyReleased(KeyEvent e) {
+//	        int key = e.getKeyCode();
+//
+//	        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
+//	            dx = 0;
+//	        }
+//	        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+//	            dx = 0;
+//	        } 
+//	    } 
+	    
 }
 	
 	

@@ -1,9 +1,11 @@
 package application;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream; 
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sound.sampled.AudioInputStream;
@@ -11,10 +13,15 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.TargetDataLine;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -140,18 +147,54 @@ public class Scenes extends Main{
 		
 		// add characters image/////////////////////
 		Spaceship player = new Spaceship(200, 100); 
-		Asteroid asteroid = new Asteroid(500, 400);
+		Asteroid asteroid = new Asteroid();
 		ImageView drawPlayer = player.getGraphic();
-		ImageView drawAsteroid = asteroid.getGraphic();
 		
-		main.getChildren().addAll(bac, drawPlayer, drawAsteroid);
 		
-		/////////////////////// EVENTHANDLER
-		
-		//EventHandler<> spaceGame = new EventHandler<>;
+		main.getChildren().addAll(bac, drawPlayer);
 		
 		/////////////////////// EVENTHANDLER
+		ArrayList<Asteroid> asteroidList = new ArrayList<Asteroid>();
+		
+		EventHandler<ActionEvent> spaceGame = new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				//System.out.println("hi");
+				player.draw();
+				
+				for (Asteroid ast : asteroidList) {
+					ast.draw();
+				}
+			}
+		};
+		
+		EventHandler<ActionEvent> spawnAsteroid = new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				Asteroid ast = new Asteroid();
+				ImageView drawAsteroid = ast.getGraphic();
+				asteroidList.add(ast);
+				main.getChildren().add(drawAsteroid);
+			}
+		};
+		
+		Timeline spawnT = new Timeline(new KeyFrame(Duration.millis(3000), spawnAsteroid));
+		spawnT.setCycleCount(Timeline.INDEFINITE);
+		spawnT.play();
+		
+		Timeline t = new Timeline(new KeyFrame(Duration.millis(32), spaceGame));
+		t.setCycleCount(Timeline.INDEFINITE);
+		t.play();
+		
+		/////////////////////// EVENTHANDLER
+		// make a list of all bullets and asteroids
+		// loop through that and call their draw methods
+		// takes care of movement
 		Scene scene = new Scene(main);
+		scene.setOnKeyPressed(player.playerKeyHandler);
+		scene.setOnKeyReleased(player.playerKeyStopHandler);
 		return scene;
 	}
 	
