@@ -19,6 +19,7 @@ public class Shot extends Characters{
 	public Shot (int x, int y) {
 		setX(this.x);
 		setY(this.y);
+		//t
 		setVisible(true);
 	}
 	

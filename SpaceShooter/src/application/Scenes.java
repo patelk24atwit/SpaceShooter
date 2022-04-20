@@ -170,6 +170,7 @@ public class Scenes extends Main{
         				Shot bullet = new Shot(player.getX(), player.getY());
         				bulletStorage.add(bullet);
         				break;
+        				//t
 	        		}
 	        	}
 		 };
