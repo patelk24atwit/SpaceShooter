@@ -143,73 +143,105 @@ public class Scenes extends Main{
 		/////////////////////////////////////////////////////////////////////////////////// EVENTHANDLER
 		
 		// EventHandler for the main gameplay
-		EventHandler<ActionEvent> spaceGame = new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent arg0) {
-			
-				player.drawShip();
+		
+			EventHandler<ActionEvent> spaceGame = new EventHandler<ActionEvent>() {
 				
-				for (Shot bullet : bulletStorage) {
-					bullet.drawBullet();
+				@Override
+				public void handle(ActionEvent arg0) {
+				
+					if(player.isDead() == false) {
+						player.drawShip();
+						
+						for (Shot bullet : bulletStorage) {
+							bullet.drawBullet();
+						}
+						
+						for (Asteroid ast : asteroidListSlow) {
+							ast.drawSlowAst();
+						}
+						
+						for (Asteroid ast : asteroidListFast) {
+							ast.drawFastAst();
+						}
+						
+						collisionDetect();
+						
+					
+					
+					}
+					
 				}
-				
-				for (Asteroid ast : asteroidListSlow) {
-					ast.drawSlowAst();
-				}
-				
-				for (Asteroid ast : asteroidListFast) {
-					ast.drawFastAst();
-				}
-				
-				collisionDetect();
-				updatePlayerStatus();
-				
-			}
-		};
-		
-		// Event Handler to spawn slow moving asteroids
-		EventHandler<ActionEvent> spawnSlowAsteroid = new EventHandler<ActionEvent>() {
+			};
 			
-			@Override
-			public void handle(ActionEvent arg0) {
-				Asteroid ast = new Asteroid();
-				asteroidListSlow.add(ast);
-				main.getChildren().add(ast.getGraphic());
-			}
-		};
-		
-		// Event Handler to spawn fast moving asteroids
-		EventHandler<ActionEvent> spawnFastAsteroid = new EventHandler<ActionEvent>() {
+			// Event Handler to spawn slow moving asteroids
+			EventHandler<ActionEvent> spawnSlowAsteroid = new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					Asteroid ast = new Asteroid();
+
+					if(player.isDead() == false) {
+					
+						asteroidListSlow.add(ast);
+						main.getChildren().add(ast.getGraphic());
+					
+					}
+					
+					else {
+						
+						main.getChildren().remove(ast.getGraphic());
+					}
+				}
+			};
 			
-			@Override
-			public void handle(ActionEvent arg0) {
-				Asteroid ast1 = new Asteroid();
-				asteroidListFast.add(ast1);
-				main.getChildren().add(ast1.getGraphic());
-			}
-		};
-		
-		// timeline for slow asteroids
-		Timeline spawnSA = new Timeline(new KeyFrame(Duration.millis(2500), spawnSlowAsteroid));
-		spawnSA.setCycleCount(Timeline.INDEFINITE);
-		spawnSA.play();
-		
-		// timeline for fast asteroids
-		Timeline spawnFA = new Timeline(new KeyFrame(Duration.millis(5000), spawnFastAsteroid));
-		spawnFA.setCycleCount(Timeline.INDEFINITE);
-		spawnFA.play();
-		
-		// timeline for the main gameplay
-		Timeline t = new Timeline(new KeyFrame(Duration.millis(32), spaceGame));
-		t.setCycleCount(Timeline.INDEFINITE);
-		t.play();
-		
+			// Event Handler to spawn fast moving asteroids
+			EventHandler<ActionEvent> spawnFastAsteroid = new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					
+					Asteroid ast1 = new Asteroid();
+
+					if(player.isDead() == false) {
+					
+						asteroidListFast.add(ast1);
+						main.getChildren().add(ast1.getGraphic());
+					
+					}
+					else {
+						
+						main.getChildren().remove(ast1.getGraphic());
+					}
+				}
+			};
+			
+			// timeline for slow asteroids
+
+				Timeline spawnSA = new Timeline(new KeyFrame(Duration.millis(2500), spawnSlowAsteroid));
+				spawnSA.setCycleCount(Timeline.INDEFINITE);
+				spawnSA.play();
+				
+				// timeline for fast asteroids
+				Timeline spawnFA = new Timeline(new KeyFrame(Duration.millis(5000), spawnFastAsteroid));
+				spawnFA.setCycleCount(Timeline.INDEFINITE);
+				spawnFA.play();
+				
+				// timeline for the main gameplay
+				Timeline t = new Timeline(new KeyFrame(Duration.millis(32), spaceGame));
+				t.setCycleCount(Timeline.INDEFINITE);
+				t.play();
+			
+			
+			
 		///////////////////////////////////////////////////////////////////////////////////////////////////
 		
+		
 		Scene scene = new Scene(main);
+		
 		scene.setOnKeyPressed(player.playerKeyHandler);
 		scene.setOnKeyReleased(player.playerKeyStopHandler);
+		
+		
 		return scene;
 	}
 	
@@ -361,6 +393,21 @@ public class Scenes extends Main{
 		return scene;
 	}
 	
+	public Scene EndScene () {
+		
+		Pane main = new Pane();
+		main.setPrefSize(width, height);
+	
+		Label bac = new Label();
+		bac.setText("End Game");
+		
+	
+		main.getChildren().addAll(view2, bac);
+		Scene scene = new Scene(main);
+		return scene;
+		
+	}
+	
 	////////////////////////////////////////////////////// MEDIA PLAYER
 	public void playMusic () {
 		try {
@@ -384,62 +431,80 @@ public class Scenes extends Main{
 	////////////////////////////////// COLLISION DETECTION METHOD
 	public void collisionDetect() {
 		
-		Shot noShot = null;
-		
-		// loops through all the bullets shot by the player
-		for (Shot bullet : bulletStorage) {
+		if(player.isDead() == false) {
+			Shot noShot = null;
 			
-			// checks for collision with a slow moving asteroid
+			// loops through all the bullets shot by the player
+			for (Shot bullet : bulletStorage) {
+				
+				// checks for collision with a slow moving asteroid
+				for (Asteroid asteroid : asteroidListSlow) {
+					if (bullet.getGraphic().getBoundsInParent().intersects
+							(asteroid.getGraphic().getBoundsInParent())) {
+						asteroid.setDead(true);
+						bullet.shotDestroyed(true);
+						noShot = bullet;
+					}
+				}
+				
+				// checks for a collision with a fast moving asteroid
+				for (Asteroid asteroid : asteroidListFast) {
+					if (bullet.getGraphic().getBoundsInParent().intersects
+							(asteroid.getGraphic().getBoundsInParent())) {
+						asteroid.setDead(true);
+						bullet.shotDestroyed(true);
+						noShot = bullet;
+					}
+				}
+				
+			}
+			
+			if (noShot != null) {
+				bulletStorage.remove(noShot);
+			}
+			
+			// checks for collision between slow asteroid and player
+			if(player.isDead() == false) {
 			for (Asteroid asteroid : asteroidListSlow) {
-				if (bullet.getGraphic().getBoundsInParent().intersects
+				if (player.getGraphic().getBoundsInParent().intersects
 						(asteroid.getGraphic().getBoundsInParent())) {
-					asteroid.setDead(true);
-					bullet.shotDestroyed(true);
-					noShot = bullet;
+					player.setDead(true);
+					updatePlayerStatus();
 				}
 			}
-			
-			// checks for a collision with a fast moving asteroid
+		
+			// checks for collision between fast asteroid and player
 			for (Asteroid asteroid : asteroidListFast) {
-				if (bullet.getGraphic().getBoundsInParent().intersects
+				if (player.getGraphic().getBoundsInParent().intersects
 						(asteroid.getGraphic().getBoundsInParent())) {
-					asteroid.setDead(true);
-					bullet.shotDestroyed(true);
-					noShot = bullet;
+					player.setDead(true);
+					updatePlayerStatus();
+					
 				}
+				
 			}
 			
-		}
-		
-		if (noShot != null) {
-			bulletStorage.remove(noShot);
-		}
-		
-		// checks for collision between slow asteroid and player
-		for (Asteroid asteroid : asteroidListSlow) {
-			if (player.getGraphic().getBoundsInParent().intersects
-					(asteroid.getGraphic().getBoundsInParent())) {
-				player.setDead(true);
-			}
-		}
-	
-		// checks for collision between fast asteroid and player
-		for (Asteroid asteroid : asteroidListFast) {
-			if (player.getGraphic().getBoundsInParent().intersects
-					(asteroid.getGraphic().getBoundsInParent())) {
-				player.setDead(true);
 			}
 		}
 	}
 	
 	// method to check if player is dead or alive
 	// if the player is dead, the game ends
+	
+	public boolean works = false;
+	
 	public void updatePlayerStatus() {
-		if (player.isDead()) {
-			player.setVisible(false);
+		if(player.isDead() == true) {
+			
+			Scene newScene = EndScene();
+			window.setScene(newScene);
+			window.setTitle("End");
+			window.show();
 			/////////////////// figure out how to stop game 
 		}
+	
 	}
+	
 
 }
 

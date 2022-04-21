@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 
 public class Shot extends Characters{
 	
-	public Image shotImg = new Image("beam.png", 50, 50, false, false);
+	public Image shotImg = new Image("asteriod.png", 50, 50, false, false);
 	public boolean destroyed = false;
 	private double[] moveVec;
 	private int xPos, yPos;
