@@ -13,7 +13,7 @@ import javafx.scene.shape.Polygon;
 public class Asteroid extends Characters {
 	//public double width;
 	public boolean destroyed;
-	Image astImg = new Image("asteriod.jpg");
+	Image astImg = new Image("asteriod.png");
 	
 	//public int dy = -1; //dy represents the change in y movement
 	

@@ -153,7 +153,7 @@ public class Scenes extends Main{
 		ImageView drawPlayer = player.getGraphic();
 		
 		
-		main.getChildren().addAll(bac, drawPlayer);
+		main.getChildren().addAll(view2 ,drawPlayer);
 		
 		/////////////////////// EVENTHANDLER
 		ArrayList<Asteroid> asteroidList = new ArrayList<Asteroid>();
@@ -298,7 +298,7 @@ public class Scenes extends Main{
 		//skin1
 		
 			//Image of the ship
-		Image ship1 = new Image("default.png", 195, 95, true, true);
+		Image ship1 = new Image("defaultShip.png", 195, 95, true, true);
 		ImageView skin1view = new ImageView(ship1);
 		skin1.setGraphic(skin1view);
 		
