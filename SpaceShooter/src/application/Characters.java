@@ -17,12 +17,11 @@ import javafx.scene.transform.Rotate;
  */
 public abstract class Characters {
 	
-	public boolean visible;
+	public boolean visible = true;
     public Image image;
-    public boolean dying;
+    public boolean dying = false;
     public ImageView graphic;
     public int SPEED = 6;
-    public int FALL = 5;
     
     int dx = 0;
     int dy = 0;
@@ -71,11 +70,11 @@ public abstract class Characters {
         return x;
     }
 
-    public void setDying(boolean dying) {
+    public void setDead(boolean dying) {
         this.dying = dying;
     }
 
-    public boolean isDying() {
+    public boolean isDead() {
         return this.dying;
     }
     

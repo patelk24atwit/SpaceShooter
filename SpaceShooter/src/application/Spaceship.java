@@ -16,8 +16,6 @@ public class Spaceship extends Characters{
 	
 	   public EventHandler<KeyEvent> playerKeyHandler;
 	   public EventHandler<KeyEvent> playerKeyStopHandler;
-	   public ArrayList<Shot> bulletStorage = new ArrayList<Shot>();
-	   
 
 	    public Spaceship(int x,  int y) {
 	    	setX(this.x);
@@ -29,6 +27,10 @@ public class Spaceship extends Characters{
 	        	@Override
 	        	public void handle(KeyEvent arg0) {
 	        		KeyCode keyPressed = arg0.getCode();
+	        		
+	        		if (keyPressed == KeyCode.SPACE) {
+	        			shoot();
+	        		}
 
 	        		switch(keyPressed) {
 	        			case A:
@@ -43,9 +45,9 @@ public class Spaceship extends Characters{
 	        			case S:
 	        				dy = 1;
 	        				break;
-	        			case SPACE:
-	        				shoot();
-	        				break;
+					default:
+						break;
+	        			
 	        		
 	        		}
 	        	}
@@ -56,15 +58,10 @@ public class Spaceship extends Characters{
 		    	
 	        	@Override
 	        	public void handle(KeyEvent arg0) {
-	        		System.out.println("key pressed");
 	        		KeyCode keyPressed = arg0.getCode();
-//	        		if (keyPressed == KeyCode.SPACE) {
-//	        			if (!visible) {
-//	        				shoot();
-//	        			}
+
 	        		switch(keyPressed) {
 	        			case A:
-	        				System.out.println("RIGHT PRESSED");
 	        				dx = 0;
 	        				break; 
 	        			case D:
@@ -76,8 +73,9 @@ public class Spaceship extends Characters{
 	        			case S:
 	        				dy = 0;
 	        				break;
-	        			case SPACE:
-	        				break;
+					default:
+						break;
+	        			
 	        		}
 	        	}
 	        	
@@ -102,15 +100,20 @@ public class Spaceship extends Characters{
 	    }  
 	    
 	    public void drawShip() {
-	    	x += dx*SPEED;
-	    	y += dy*SPEED;
+	    	if (!isDead()) {
+	    		x += dx*SPEED;
+		    	y += dy*SPEED;
+		    	
+		    	this.getGraphic().setX(x);
+		    	this.getGraphic().setY(y);
+	    	}
+	    	else {
+	    		setImage(null);
+	    	}
 	    	
-	    	this.getGraphic().setX(x);
-	    	this.getGraphic().setY(y);
 	    }
 	    
 	    public void shoot() {
-	    	Shot bullet = new Shot(this.getX(), this.getY());
-	    	bulletStorage.add(bullet);
+	    	Scenes.createBullet(getX(), getY(), new double[] {0.0, -1.0});
 	    }
 }
