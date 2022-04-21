@@ -11,31 +11,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polygon;
 
 public class Asteroid extends Characters {
-	//public double width;
 	public boolean destroyed;
 	Image astImg = new Image("asteriod.png");
-	
-	//public int dy = -1; //dy represents the change in y movement
-	
 	
 	
 	public Asteroid () {
 		asteroid();
-//		setX(this.x);
-//		setY(this.y);
 	}
 	
-//	public Asteroid() {
-//	}
-//	
 	public void asteroid() {
-	
-		
 		setImage(astImg);
 		ImageView astGraphic = new ImageView(getImage());
 		setGraphic(astGraphic);
-		
-		//width = asteroid.getImage().getWidth();
+	
       
         // x should be a random number within the bounds of the game stage
 		int n = ThreadLocalRandom.current().nextInt(50, 750 + 1);
@@ -49,8 +37,14 @@ public class Asteroid extends Characters {
         dy = 1;
 	}
 	
-	public void astMovement() {
-		setY(getY()*(-1)*FALL);
+	public void drawSlowAst() {
+    	y += dy*2;
+    	this.getGraphic().setY(y);
+	}
+	
+	public void drawFastAst() {
+    	y += dy*5;
+    	this.getGraphic().setY(y);
 	}
 	
 	public void setAstDestroyed(boolean destroyed) {

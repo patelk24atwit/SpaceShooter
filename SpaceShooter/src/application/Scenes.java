@@ -45,11 +45,6 @@ import javafx.scene.text.Font;
 
 public class Scenes extends Main{
 	
-	// everything needs a draw function
-	// keep calling the draw functions in a loop
-	// in main game logic, create event handler and timeline to keep running event hand
-	
-	
 	public Stage window;
 	public Scene scene;
 	private static int width = 800;
@@ -61,15 +56,16 @@ public class Scenes extends Main{
 	public ImageView view = new ImageView("game.jpg"); 
 	public ImageView view2 = new ImageView("game2.jpg");
 	public String MEDIA = "music.wav";
+	public static ArrayList<Shot> bulletStorage = new ArrayList<Shot>();
 	
-
+	public static Pane main = new Pane();
+	public Spaceship player = new Spaceship(500, 400);
+	public ArrayList<Asteroid> asteroidListSlow = new ArrayList<Asteroid>();
+	public ArrayList<Asteroid> asteroidListFast = new ArrayList<Asteroid>();
 	
 
 	public Scenes(Stage window) {
-		
 		this.window = window;
-		
-		//
 		window.setTitle("Start");
 		window.setResizable(false);
 		
@@ -78,15 +74,15 @@ public class Scenes extends Main{
 	//Opening Scene
 	public Scene Main () {
 	
-		Button sta = new Button();
-		Button gea = new Button();
+		Button sta = new Button(); // start button
+		Button gea = new Button(); // settings (gear) button
 		
 		Pane main = new Pane();
 		main.setPrefSize(width, height);
 		Image image = new Image("gear.png", 24, 24, true, true);
 		ImageView geaUrl = new ImageView(image);
 		
-		//Start gear button
+		// gear button
 	    gea.setContentDisplay(ContentDisplay.TOP);
 		gea.setStyle("-fx-background-radius: 10px;"
 				+ "-fx-background-color: white;");
@@ -97,7 +93,6 @@ public class Scenes extends Main{
 		gea.setGraphic(geaUrl);
 		
 		gea.setOnAction(e -> {
-			
 			Scene MenuScene = Menu();
 			window.setScene(MenuScene);
 			window.setTitle("Settings");
@@ -121,20 +116,16 @@ public class Scenes extends Main{
 			window.show();
 		});
 	
-    
 	main.getChildren().addAll(view, sta, gea);
 	Scene scene = new Scene(main);
-	
 	return scene;
 	}
 	
-	//Game
+	// MAIN GAMEPLAY
 	// this is what happens after you click start
-	// run timeline loop in here? (game logic goes here)
 	public Scene Start () {
 		Button bac = new Button();
 		
-		Pane main = new Pane();
 		main.setPrefSize(width, height);
 		main.setStyle("-fx-background-color: white;");
 		
@@ -147,81 +138,88 @@ public class Scenes extends Main{
 			window.show();
 		});
 		
-		// add characters image/////////////////////
-		Spaceship player = new Spaceship(200, 100); 
-		Asteroid asteroid = new Asteroid();
-		ImageView drawPlayer = player.getGraphic();
+		main.getChildren().add(player.getGraphic());
 		
+		/////////////////////////////////////////////////////////////////////////////////// EVENTHANDLER
 		
-		main.getChildren().addAll(view2 ,drawPlayer);
-		
-		/////////////////////// EVENTHANDLER
-		ArrayList<Asteroid> asteroidList = new ArrayList<Asteroid>();
-		ArrayList<Shot> bulletStorage = new ArrayList<Shot>();
-		
-		EventHandler<KeyEvent> playerShootHandler = new EventHandler<KeyEvent>() {
-		    	
-	        	@Override
-	        	public void handle(KeyEvent arg0) {
-	        		KeyCode keyPressed = arg0.getCode();
-	        		switch(keyPressed) {
-        			
-        			case SPACE:
-        				Shot bullet = new Shot(player.getX(), player.getY());
-        				bulletStorage.add(bullet);
-        				break;
-        				//t
-	        		}
-	        	}
-		 };
-	       
-		
+		// EventHandler for the main gameplay
 		EventHandler<ActionEvent> spaceGame = new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent arg0) {
-				//System.out.println("hi");
-				player.draw();
+			
+				player.drawShip();
 				
 				for (Shot bullet : bulletStorage) {
-					bullet.draw();
+					bullet.drawBullet();
 				}
 				
-				for (Asteroid ast : asteroidList) {
-					ast.draw();
+				for (Asteroid ast : asteroidListSlow) {
+					ast.drawSlowAst();
 				}
+				
+				for (Asteroid ast : asteroidListFast) {
+					ast.drawFastAst();
+				}
+				
+				collisionDetect();
+				updatePlayerStatus();
 				
 			}
 		};
 		
-		EventHandler<ActionEvent> spawnAsteroid = new EventHandler<ActionEvent>() {
+		// Event Handler to spawn slow moving asteroids
+		EventHandler<ActionEvent> spawnSlowAsteroid = new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent arg0) {
 				Asteroid ast = new Asteroid();
-				ImageView drawAsteroid = ast.getGraphic();
-				asteroidList.add(ast);
-				main.getChildren().add(drawAsteroid);
+				asteroidListSlow.add(ast);
+				main.getChildren().add(ast.getGraphic());
 			}
 		};
 		
-		Timeline spawnT = new Timeline(new KeyFrame(Duration.millis(3000), spawnAsteroid));
-		spawnT.setCycleCount(Timeline.INDEFINITE);
-		spawnT.play();
+		// Event Handler to spawn fast moving asteroids
+		EventHandler<ActionEvent> spawnFastAsteroid = new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				Asteroid ast1 = new Asteroid();
+				asteroidListFast.add(ast1);
+				main.getChildren().add(ast1.getGraphic());
+			}
+		};
 		
+		// timeline for slow asteroids
+		Timeline spawnSA = new Timeline(new KeyFrame(Duration.millis(2500), spawnSlowAsteroid));
+		spawnSA.setCycleCount(Timeline.INDEFINITE);
+		spawnSA.play();
+		
+		// timeline for fast asteroids
+		Timeline spawnFA = new Timeline(new KeyFrame(Duration.millis(5000), spawnFastAsteroid));
+		spawnFA.setCycleCount(Timeline.INDEFINITE);
+		spawnFA.play();
+		
+		// timeline for the main gameplay
 		Timeline t = new Timeline(new KeyFrame(Duration.millis(32), spaceGame));
 		t.setCycleCount(Timeline.INDEFINITE);
 		t.play();
 		
-		/////////////////////// EVENTHANDLER
-		// make a list of all bullets and asteroids
-		// loop through that and call their draw methods
-		// takes care of movement
+		///////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		Scene scene = new Scene(main);
 		scene.setOnKeyPressed(player.playerKeyHandler);
 		scene.setOnKeyReleased(player.playerKeyStopHandler);
 		return scene;
 	}
+	
+	// method to create instances of shots (bullets)
+	 public static void createBullet(int x, int y, double[] shotMove) {
+		 System.out.println("shooting");
+			Shot bullet = new Shot(x, y, shotMove);
+			bulletStorage.add(bullet);
+			main.getChildren().add(bullet.getGraphic());
+		}
 	
 	//Menu Scene
 	public Scene Menu () {
@@ -247,17 +245,13 @@ public class Scenes extends Main{
 		pla.setLayoutY(100);
 		
 		if(play == true) {
-			
 			pla.setText("ON");
 		}
 		else {
-			
 			pla.setText("OFF");
 		}
 		
 		pla.setOnAction(e -> {
-			
-			
 			if(play == true) {
 				
 				play = false;
@@ -270,11 +264,7 @@ public class Scenes extends Main{
 				playMusic();
 				
 			}
-			
-			
 		});
-		
-
 		
 		//Back button
 		bac.setText("Back");
@@ -295,8 +285,8 @@ public class Scenes extends Main{
 		
 			
 		});
+		/////////////////////////////////////// SKINS
 		//skin1
-		
 			//Image of the ship
 		Image ship1 = new Image("defaultShip.png", 195, 95, true, true);
 		ImageView skin1view = new ImageView(ship1);
@@ -364,21 +354,15 @@ public class Scenes extends Main{
 		
 		skin3.setOnAction(e -> {
 			
-			
 		});
-		
-		
-		
-		
 		
 		main.getChildren().addAll(view2, pla, bac, skin1, skin2, skin3, sone);
 		Scene scene = new Scene(main);
 		return scene;
 	}
 	
+	////////////////////////////////////////////////////// MEDIA PLAYER
 	public void playMusic () {
-		
-		
 		try {
 			
 			File music = new File("./music.wav");
@@ -393,16 +377,69 @@ public class Scenes extends Main{
 		    
 		}
 		catch (Exception e) {
-			
 			System.out.print("error Line 267 scenes class");
 		}
-			
-		
 	}
 	
-//	public void runGame() {
-//		Game_Logic runSpaceShooters = new Game_Logic();
-//	}
+	////////////////////////////////// COLLISION DETECTION METHOD
+	public void collisionDetect() {
+		
+		Shot noShot = null;
+		
+		// loops through all the bullets shot by the player
+		for (Shot bullet : bulletStorage) {
+			
+			// checks for collision with a slow moving asteroid
+			for (Asteroid asteroid : asteroidListSlow) {
+				if (bullet.getGraphic().getBoundsInParent().intersects
+						(asteroid.getGraphic().getBoundsInParent())) {
+					asteroid.setDead(true);
+					bullet.shotDestroyed(true);
+					noShot = bullet;
+				}
+			}
+			
+			// checks for a collision with a fast moving asteroid
+			for (Asteroid asteroid : asteroidListFast) {
+				if (bullet.getGraphic().getBoundsInParent().intersects
+						(asteroid.getGraphic().getBoundsInParent())) {
+					asteroid.setDead(true);
+					bullet.shotDestroyed(true);
+					noShot = bullet;
+				}
+			}
+			
+		}
+		
+		if (noShot != null) {
+			bulletStorage.remove(noShot);
+		}
+		
+		// checks for collision between slow asteroid and player
+		for (Asteroid asteroid : asteroidListSlow) {
+			if (player.getGraphic().getBoundsInParent().intersects
+					(asteroid.getGraphic().getBoundsInParent())) {
+				player.setDead(true);
+			}
+		}
+	
+		// checks for collision between fast asteroid and player
+		for (Asteroid asteroid : asteroidListFast) {
+			if (player.getGraphic().getBoundsInParent().intersects
+					(asteroid.getGraphic().getBoundsInParent())) {
+				player.setDead(true);
+			}
+		}
+	}
+	
+	// method to check if player is dead or alive
+	// if the player is dead, the game ends
+	public void updatePlayerStatus() {
+		if (player.isDead()) {
+			player.setVisible(false);
+			/////////////////// figure out how to stop game 
+		}
+	}
 
 }
 
