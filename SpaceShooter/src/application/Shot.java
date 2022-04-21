@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 
 public class Shot extends Characters{
 	
-	public Image shotImg = new Image("asteriod.png", 50, 50, false, false);
+	public Image shotImg = new Image("beamone.png", 10, 10, false, false);
 	public boolean destroyed = false;
 	private double[] moveVec;
 	private int xPos, yPos;
@@ -27,8 +27,8 @@ public class Shot extends Characters{
 		ImageView shotGraphic = new ImageView(this.getImage());
 		this.setGraphic(shotGraphic);
 		
-		getGraphic().setX(x);
-		getGraphic().setY(y);
+		getGraphic().setX(x + 24);
+		getGraphic().setY(y+2);
 		setVisible(true);
 		moveVec = shotMove;
 		

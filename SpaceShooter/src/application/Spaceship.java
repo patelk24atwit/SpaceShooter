@@ -12,7 +12,8 @@ import javafx.scene.input.KeyEvent;
 
 public class Spaceship extends Characters{
 	
-	public Image ii = new Image("defaultShip.png");
+	public String images = "defaultShip.png";
+	public Image ii = new Image(images);
 	
 	   public EventHandler<KeyEvent> playerKeyHandler;
 	   public EventHandler<KeyEvent> playerKeyStopHandler;

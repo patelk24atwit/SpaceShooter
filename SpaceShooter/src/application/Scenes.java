@@ -14,6 +14,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.TargetDataLine;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -76,12 +77,34 @@ public class Scenes extends Main{
 	
 		Button sta = new Button(); // start button
 		Button gea = new Button(); // settings (gear) button
+		Label keys = new Label();
 		
 		Pane main = new Pane();
 		main.setPrefSize(width, height);
 		Image image = new Image("gear.png", 24, 24, true, true);
 		ImageView geaUrl = new ImageView(image);
+		Image keyinstruction = new Image("instructions.png", 480, 131, true, true);
+		ImageView keyinstructions = new ImageView(keyinstruction);
 		
+		//keys label
+		
+
+		keys.setLayoutX(160);
+		keys.setLayoutY(400);
+		keys.setGraphic(keyinstructions);
+		
+		
+			PauseTransition visiblePause = new PauseTransition(
+					
+			        Duration.seconds(4)
+			);
+			
+			visiblePause.setOnFinished(
+					
+			        event -> keys.setVisible(false)
+			);
+		
+		visiblePause.play();
 		// gear button
 	    gea.setContentDisplay(ContentDisplay.TOP);
 		gea.setStyle("-fx-background-radius: 10px;"
@@ -116,7 +139,7 @@ public class Scenes extends Main{
 			window.show();
 		});
 	
-	main.getChildren().addAll(view, sta, gea);
+	main.getChildren().addAll(view, sta, gea, keys);
 	Scene scene = new Scene(main);
 	return scene;
 	}
@@ -127,7 +150,6 @@ public class Scenes extends Main{
 		Button bac = new Button();
 		
 		main.setPrefSize(width, height);
-		main.setStyle("-fx-background-color: white;");
 		
 		bac.setText("Back");
 		bac.setOnAction(e -> {
@@ -138,7 +160,7 @@ public class Scenes extends Main{
 			window.show();
 		});
 		
-		main.getChildren().add(player.getGraphic());
+		main.getChildren().addAll(view2,player.getGraphic());
 		
 		/////////////////////////////////////////////////////////////////////////////////// EVENTHANDLER
 		
@@ -349,7 +371,7 @@ public class Scenes extends Main{
 	
 		skin1.setOnAction(e -> {
 			
-			
+			player.images = "defaultShip.png";
 			
 		});
 		
@@ -368,7 +390,8 @@ public class Scenes extends Main{
 		
 		skin2.setOnAction(e -> {
 			
-			
+			player.images = "ship2.png";
+
 		});
 		
 		//skin3
@@ -386,6 +409,8 @@ public class Scenes extends Main{
 		
 		skin3.setOnAction(e -> {
 			
+			player.images = "ship3.png";
+
 		});
 		
 		main.getChildren().addAll(view2, pla, bac, skin1, skin2, skin3, sone);
