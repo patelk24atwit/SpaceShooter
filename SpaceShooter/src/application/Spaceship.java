@@ -12,7 +12,7 @@ import javafx.scene.input.KeyEvent;
 
 public class Spaceship extends Characters{
 	
-	public String images = "defaultShip.png";
+	public static String images = "defaultShip.png";
 	public Image ii = new Image(images);
 	
 	   public EventHandler<KeyEvent> playerKeyHandler;
@@ -86,6 +86,12 @@ public class Spaceship extends Characters{
 	    
 	    public Spaceship() {
 	    }
+	    
+	    public void setImagetwo(String image) {
+	    	
+	    	images = image;
+	    	System.out.println("Fes");
+	    }
 
 	    public void ship() {
 	    	setImage(ii);
@@ -117,4 +123,6 @@ public class Spaceship extends Characters{
 	    public void shoot() {
 	    	Scenes.createBullet(getX(), getY(), new double[] {0.0, -1.0});
 	    }
+
+		
 }

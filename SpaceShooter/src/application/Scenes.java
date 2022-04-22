@@ -54,6 +54,7 @@ public class Scenes extends Main{
 	public boolean Ind_One = false;
 	public boolean Ind_two = false;
 	public boolean Ind_tre = false;
+	public int Score = 0;
 	public ImageView view = new ImageView("game.jpg"); 
 	public ImageView view2 = new ImageView("game2.jpg");
 	public String MEDIA = "music.wav";
@@ -148,8 +149,17 @@ public class Scenes extends Main{
 	// this is what happens after you click start
 	public Scene Start () {
 		Button bac = new Button();
+		//Label score = new Label();
 		
 		main.setPrefSize(width, height);
+				
+//		score.setText(String.valueOf(Score));
+//		score.setLayoutX(400);
+//		score.setLayoutY(400);
+//		score.setPrefHeight(20);
+//		score.setPrefWidth(30);
+//		score.setStyle("-fx-background-color: white;");
+		
 		
 		bac.setText("Back");
 		bac.setOnAction(e -> {
@@ -160,7 +170,7 @@ public class Scenes extends Main{
 			window.show();
 		});
 		
-		main.getChildren().addAll(view2,player.getGraphic());
+		main.getChildren().addAll(view2, player.getGraphic());
 		
 		/////////////////////////////////////////////////////////////////////////////////// EVENTHANDLER
 		
@@ -187,8 +197,6 @@ public class Scenes extends Main{
 						}
 						
 						collisionDetect();
-						
-					
 					
 					}
 					
@@ -336,6 +344,7 @@ public class Scenes extends Main{
 		//skin1
 			//Image of the ship
 		Image ship1 = new Image("defaultShip.png", 195, 95, true, true);
+		String ship11 = "defaultShip.png";
 		ImageView skin1view = new ImageView(ship1);
 		skin1.setGraphic(skin1view);
 		
@@ -364,7 +373,8 @@ public class Scenes extends Main{
 	
 		skin1.setOnAction(e -> {
 			
-			player.images = "defaultShip.png";
+		 player.setImagetwo(ship11);
+		 System.out.println("work");
 			
 		});
 		
@@ -372,6 +382,7 @@ public class Scenes extends Main{
 		
 			//Image of the ship
 		Image ship2 = new Image("ship2.png", 200, 100, true, true);
+		String ship22 = "ship2.png";
 		ImageView skin2view = new ImageView(ship2);
 		skin2.setGraphic(skin2view);
 			
@@ -383,7 +394,8 @@ public class Scenes extends Main{
 		
 		skin2.setOnAction(e -> {
 			
-			player.images = "ship2.png";
+			 player.setImagetwo(ship22);
+			 System.out.println("work");
 
 		});
 		
@@ -391,6 +403,7 @@ public class Scenes extends Main{
 		
 			//Image of the ship
 		Image ship3 = new Image("ship3.png", 200, 100, true, true);
+		String ship33 = "ship3.png";
 		ImageView skin3view = new ImageView(ship3);
 		skin3.setGraphic(skin3view);
 		
@@ -402,7 +415,8 @@ public class Scenes extends Main{
 		
 		skin3.setOnAction(e -> {
 			
-			player.images = "ship3.png";
+			 player.setImagetwo(ship33);
+			 System.out.println("work");
 
 		});
 		
@@ -464,6 +478,8 @@ public class Scenes extends Main{
 						bullet.shotDestroyed(true);
 						bulletStorage.remove(bullet);
 						noShot = bullet;
+						Score = Score + 100;
+						
 					}
 				}
 				
@@ -476,6 +492,8 @@ public class Scenes extends Main{
 						bullet.shotDestroyed(true);
 						bulletStorage.remove(bullet);
 						noShot = bullet;
+						Score = Score + 150;
+
 					}
 				}
 				
@@ -512,9 +530,7 @@ public class Scenes extends Main{
 	
 	// method to check if player is dead or alive
 	// if the player is dead, the game ends
-	
-	public boolean works = false;
-	
+		
 	public void updatePlayerStatus() {
 		if(player.isDead() == true) {
 			//Game End Change Scene
@@ -525,6 +541,7 @@ public class Scenes extends Main{
 		}
 	
 	}
+		
 	
 
 }
