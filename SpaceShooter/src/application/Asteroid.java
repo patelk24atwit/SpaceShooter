@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polygon;
 
 public class Asteroid extends Characters {
-	public boolean destroyed;
+	public boolean destroyed = false;
 	Image astImg = new Image("asteriod.png");
 	
 	
@@ -49,6 +49,7 @@ public class Asteroid extends Characters {
 	
 	public void setAstDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
+		this.getGraphic().setImage(null);
 	}
 	
 	public boolean getDestroyed() {

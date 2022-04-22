@@ -206,13 +206,10 @@ public class Scenes extends Main{
 					
 						asteroidListSlow.add(ast);
 						main.getChildren().add(ast.getGraphic());
-					
-					}
-					
-					else {
 						
-						main.getChildren().remove(ast.getGraphic());
 					}
+					
+				
 				}
 			};
 			
@@ -229,10 +226,6 @@ public class Scenes extends Main{
 						asteroidListFast.add(ast1);
 						main.getChildren().add(ast1.getGraphic());
 					
-					}
-					else {
-						
-						main.getChildren().remove(ast1.getGraphic());
 					}
 				}
 			};
@@ -456,7 +449,7 @@ public class Scenes extends Main{
 	////////////////////////////////// COLLISION DETECTION METHOD
 	public void collisionDetect() {
 		
-		if(player.isDead() == false) {
+		
 			Shot noShot = null;
 			
 			// loops through all the bullets shot by the player
@@ -466,8 +459,10 @@ public class Scenes extends Main{
 				for (Asteroid asteroid : asteroidListSlow) {
 					if (bullet.getGraphic().getBoundsInParent().intersects
 							(asteroid.getGraphic().getBoundsInParent())) {
-						asteroid.setDead(true);
+						asteroidListSlow.remove(asteroid);
+						asteroid.setAstDestroyed(true);
 						bullet.shotDestroyed(true);
+						bulletStorage.remove(bullet);
 						noShot = bullet;
 					}
 				}
@@ -476,13 +471,15 @@ public class Scenes extends Main{
 				for (Asteroid asteroid : asteroidListFast) {
 					if (bullet.getGraphic().getBoundsInParent().intersects
 							(asteroid.getGraphic().getBoundsInParent())) {
-						asteroid.setDead(true);
+						asteroidListFast.remove(asteroid);
+						asteroid.setAstDestroyed(true);
 						bullet.shotDestroyed(true);
+						bulletStorage.remove(bullet);
 						noShot = bullet;
 					}
 				}
 				
-			}
+			
 			
 			if (noShot != null) {
 				bulletStorage.remove(noShot);
@@ -492,7 +489,7 @@ public class Scenes extends Main{
 			if(player.isDead() == false) {
 			for (Asteroid asteroid : asteroidListSlow) {
 				if (player.getGraphic().getBoundsInParent().intersects
-						(asteroid.getGraphic().getBoundsInParent())) {
+						(asteroid.getGraphic().getBoundsInParent())&& !asteroid.getDestroyed()) {
 					player.setDead(true);
 					updatePlayerStatus();
 				}
@@ -500,8 +497,8 @@ public class Scenes extends Main{
 		
 			// checks for collision between fast asteroid and player
 			for (Asteroid asteroid : asteroidListFast) {
-				if (player.getGraphic().getBoundsInParent().intersects
-						(asteroid.getGraphic().getBoundsInParent())) {
+				if (player.getGraphic().getBoundsInParent().intersects 
+						(asteroid.getGraphic().getBoundsInParent())&& !asteroid.getDestroyed()) {
 					player.setDead(true);
 					updatePlayerStatus();
 					
@@ -520,12 +517,11 @@ public class Scenes extends Main{
 	
 	public void updatePlayerStatus() {
 		if(player.isDead() == true) {
-			
+			//Game End Change Scene
 			Scene newScene = EndScene();
 			window.setScene(newScene);
 			window.setTitle("End");
 			window.show();
-			/////////////////// figure out how to stop game 
 		}
 	
 	}
