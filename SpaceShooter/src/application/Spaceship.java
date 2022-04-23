@@ -87,11 +87,6 @@ public class Spaceship extends Characters{
 	    public Spaceship() {
 	    }
 	    
-	    public void setImagetwo(String image) {
-	    	
-	    	images = image;
-	    	System.out.println("Fes");
-	    }
 
 	    public void ship() {
 	    	setImage(ii);

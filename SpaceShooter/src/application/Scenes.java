@@ -54,10 +54,10 @@ public class Scenes extends Main{
 	public boolean Ind_One = false;
 	public boolean Ind_two = false;
 	public boolean Ind_tre = false;
+	public Label scoreLabel = new Label("Score: 0");
 	public int Score = 0;
 	public ImageView view = new ImageView("game.jpg"); 
 	public ImageView view2 = new ImageView("game2.jpg");
-	public String MEDIA = "music.wav";
 	public static ArrayList<Shot> bulletStorage = new ArrayList<Shot>();
 	
 	public static Pane main = new Pane();
@@ -77,7 +77,7 @@ public class Scenes extends Main{
 	public Scene Main () {
 	
 		Button sta = new Button(); // start button
-		Button gea = new Button(); // settings (gear) button
+		//Button gea = new Button(); // settings (gear) button
 		Label keys = new Label();
 		
 		Pane main = new Pane();
@@ -107,21 +107,21 @@ public class Scenes extends Main{
 		
 		visiblePause.play();
 		// gear button
-	    gea.setContentDisplay(ContentDisplay.TOP);
-		gea.setStyle("-fx-background-radius: 10px;"
-				+ "-fx-background-color: white;");
-		gea.setPrefHeight(50);
-		gea.setPrefWidth(50);
-		gea.setLayoutX(460);
-		gea.setLayoutY(300);
-		gea.setGraphic(geaUrl);
-		
-		gea.setOnAction(e -> {
-			Scene MenuScene = Menu();
-			window.setScene(MenuScene);
-			window.setTitle("Settings");
-			window.show();
-		});
+//	    gea.setContentDisplay(ContentDisplay.TOP);
+//		gea.setStyle("-fx-background-radius: 10px;"
+//				+ "-fx-background-color: white;");
+//		gea.setPrefHeight(50);
+//		gea.setPrefWidth(50);
+//		gea.setLayoutX(460);
+//		gea.setLayoutY(300);
+//		gea.setGraphic(geaUrl);
+//		
+//		gea.setOnAction(e -> {
+//			Scene MenuScene = Menu();
+//			window.setScene(MenuScene);
+//			window.setTitle("Settings");
+//			window.show();
+//		});
 		
 		
 		//Start Button
@@ -140,7 +140,7 @@ public class Scenes extends Main{
 			window.show();
 		});
 	
-	main.getChildren().addAll(view, sta, gea, keys);
+	main.getChildren().addAll(view, sta, keys);
 	Scene scene = new Scene(main);
 	return scene;
 	}
@@ -148,29 +148,15 @@ public class Scenes extends Main{
 	// MAIN GAMEPLAY
 	// this is what happens after you click start
 	public Scene Start () {
-		Button bac = new Button();
-		//Label score = new Label();
 		
 		main.setPrefSize(width, height);
-				
-//		score.setText(String.valueOf(Score));
-//		score.setLayoutX(400);
-//		score.setLayoutY(400);
-//		score.setPrefHeight(20);
-//		score.setPrefWidth(30);
-//		score.setStyle("-fx-background-color: white;");
 		
+		scoreLabel.setLayoutX(700);
+		scoreLabel.setLayoutY(5);
+		scoreLabel.setStyle("-fx-font: 15px Lucida-Fax;"
+				+ "-fx-text-fill: white;");
 		
-		bac.setText("Back");
-		bac.setOnAction(e -> {
-		
-			Scene newScene = Main();
-			window.setScene(newScene);
-			window.setTitle("Start");
-			window.show();
-		});
-		
-		main.getChildren().addAll(view2, player.getGraphic());
+		main.getChildren().addAll(view2, player.getGraphic(), scoreLabel);
 		
 		/////////////////////////////////////////////////////////////////////////////////// EVENTHANDLER
 		
@@ -197,7 +183,7 @@ public class Scenes extends Main{
 						}
 						
 						collisionDetect();
-					
+
 					}
 					
 				}
@@ -277,153 +263,68 @@ public class Scenes extends Main{
 		}
 	
 	//Menu Scene
-	public Scene Menu () {
-		
-		Pane main = new Pane();
-		main.setPrefSize(width, height);
-		main.setStyle("-fx-background-color: white;");
-		Button pla = new Button();
-		Button bac = new Button();
-		Button skin1 = new Button();
-		Button skin2 = new Button();
-		Button skin3 = new Button();
-		
-		Label sone = new Label();
-		Label stwo = new Label();
-		Label stre = new Label();
-
-		
-		//Play/Pause
-		pla.setPrefHeight(75);
-		pla.setPrefWidth(100);
-		pla.setLayoutX(350);
-		pla.setLayoutY(100);
-		
-		if(play == true) {
-			pla.setText("ON");
-		}
-		else {
-			pla.setText("OFF");
-		}
-		
-		pla.setOnAction(e -> {
-			if(play == true) {
-				
-				play = false;
-				pla.setText("OFF");
-			}
-			else {
-				
-				play = true;
-				pla.setText("ON");
-				playMusic();
-				
-			}
-		});
-		
-		//Back button
-		bac.setText("Back");
-		bac.setLayoutX(690);
-		bac.setLayoutY(540);
-		bac.setPrefHeight(50);
-		bac.setPrefWidth(100);
-		bac.setStyle("-fx-background-color: white;"
-				+ "-fx-font: 15px Lucida-Fax;"
-				+ "-fx-background-radius: 5px;");
-		
-		bac.setOnAction(e -> {
-			
-			Scene newScene = Main();
-			window.setScene(newScene);
-			window.setTitle("Start");
-			window.show();
-		
-			
-		});
-		/////////////////////////////////////// SKINS
-		//skin1
-			//Image of the ship
-		Image ship1 = new Image("defaultShip.png", 195, 95, true, true);
-		String ship11 = "defaultShip.png";
-		ImageView skin1view = new ImageView(ship1);
-		skin1.setGraphic(skin1view);
-		
-			//Indicator
-		sone.setPrefHeight(1);
-		sone.setPrefWidth(50);
-		sone.setLayoutX(150);
-		sone.setLayoutY(410);
-		
-		if(Ind_One == false) {
-			
-			sone.setOpacity(0);
-			
-		} 
-		else {
-			
-			sone.setOpacity(1);
-			sone.setStyle("-fx-background-color: red;");
-		}
-				
-			//height and x and y coords //Dont change
-		skin1.setPrefHeight(100);
-		skin1.setPrefWidth(200);
-		skin1.setLayoutX(75);
-		skin1.setLayoutY(300);
-	
-		skin1.setOnAction(e -> {
-			
-		 player.setImagetwo(ship11);
-		 System.out.println("work");
-			
-		});
-		
-		//skin2
-		
-			//Image of the ship
-		Image ship2 = new Image("ship2.png", 200, 100, true, true);
-		String ship22 = "ship2.png";
-		ImageView skin2view = new ImageView(ship2);
-		skin2.setGraphic(skin2view);
-			
-			//height and x and y coords //Dont change
-		skin2.setPrefHeight(100);
-		skin2.setPrefWidth(200);
-		skin2.setLayoutX(300);
-		skin2.setLayoutY(300);
-		
-		skin2.setOnAction(e -> {
-			
-			 player.setImagetwo(ship22);
-			 System.out.println("work");
-
-		});
-		
-		//skin3
-		
-			//Image of the ship
-		Image ship3 = new Image("ship3.png", 200, 100, true, true);
-		String ship33 = "ship3.png";
-		ImageView skin3view = new ImageView(ship3);
-		skin3.setGraphic(skin3view);
-		
-			//height and x and y coords //Dont change
-		skin3.setPrefHeight(100);
-		skin3.setPrefWidth(200);
-		skin3.setLayoutX(525);
-		skin3.setLayoutY(300);
-		
-		skin3.setOnAction(e -> {
-			
-			 player.setImagetwo(ship33);
-			 System.out.println("work");
-
-		});
-		
-		main.getChildren().addAll(view2, pla, bac, skin1, skin2, skin3, sone);
-		Scene scene = new Scene(main);
-		return scene;
-	}
+//	public Scene Menu () {
+//		
+//		Pane main = new Pane();
+//		main.setPrefSize(width, height);
+//		main.setStyle("-fx-background-color: white;");
+//		Button pla = new Button();
+//		Button bac = new Button();
+//		
+//
+//		
+//		//Play/Pause
+//		pla.setPrefHeight(75);
+//		pla.setPrefWidth(100);
+//		pla.setLayoutX(350);
+//		pla.setLayoutY(100);
+//		
+//		if(play == true) {
+//			pla.setText("ON");
+//		}
+//		else {
+//			pla.setText("OFF");
+//		}
+//		
+//		pla.setOnAction(e -> {
+//			if(play == true) {
+//				
+//				play = false;
+//				pla.setText("OFF");
+//			}
+//			else {
+//				
+//				play = true;
+//				pla.setText("ON");
+//				playMusic();
+//				
+//			}
+//		});
+//		
+//		//Back button
+//		bac.setText("Back");
+//		bac.setLayoutX(690);
+//		bac.setLayoutY(540);
+//		bac.setPrefHeight(50);
+//		bac.setPrefWidth(100);
+//		bac.setStyle("-fx-background-color: white;"
+//				+ "-fx-font: 15px Lucida-Fax;"
+//				+ "-fx-background-radius: 5px;");
+//		
+//		bac.setOnAction(e -> {
+//			
+//			Scene newScene = Main();
+//			window.setScene(newScene);
+//			window.setTitle("Start");
+//			window.show();
+//		
+//			
+//		});
+//		
+//		main.getChildren().addAll(view2, pla, bac);
+//		Scene scene = new Scene(main);
+//		return scene;
+//	}
 	
 	public Scene EndScene () {
 		
@@ -431,8 +332,12 @@ public class Scenes extends Main{
 		main.setPrefSize(width, height);
 	
 		Label bac = new Label();
-		bac.setText("End Game");
-		
+		bac.setText("Thank you for playing your score was " + Score + " .");
+		bac.setLayoutX(200);
+		bac.setLayoutY(100);
+		bac.setStyle("-fx-text-fill: white;"
+				+ "-fx-font: 25px Lucida-Fax;");
+			
 	
 		main.getChildren().addAll(view2, bac);
 		Scene scene = new Scene(main);
@@ -440,26 +345,26 @@ public class Scenes extends Main{
 		
 	}
 	
-	////////////////////////////////////////////////////// MEDIA PLAYER
-	public void playMusic () {
-		try {
-			
-			File music = new File("./music.wav");
-			AudioInputStream audios = AudioSystem.getAudioInputStream(music);
-			Clip clip = AudioSystem.getClip();
-			clip.open(audios);
-			clip.start();
-			
-		    Thread.sleep(500);
-		    
-		    audios.close();
-		    
-		}
-		catch (Exception e) {
-			System.out.print("error Line 267 scenes class");
-		}
-	}
-	
+//	////////////////////////////////////////////////////// MEDIA PLAYER
+//	public void playMusic () {
+//		try {
+//			
+//			File music = new File("./music.wav");
+//			AudioInputStream audios = AudioSystem.getAudioInputStream(music);
+//			Clip clip = AudioSystem.getClip();
+//			clip.open(audios);
+//			clip.start();
+//			
+//		    Thread.sleep(500);
+//		    
+//		    audios.close();
+//		    
+//		}
+//		catch (Exception e) {
+//			System.out.print("error Line 267 scenes class");
+//		}
+//	}
+//	
 	////////////////////////////////// COLLISION DETECTION METHOD
 	public void collisionDetect() {
 		
@@ -478,8 +383,8 @@ public class Scenes extends Main{
 						bullet.shotDestroyed(true);
 						bulletStorage.remove(bullet);
 						noShot = bullet;
-						Score = Score + 100;
-						
+						Score = Score + 50;
+						updateScore();						
 					}
 				}
 				
@@ -492,7 +397,8 @@ public class Scenes extends Main{
 						bullet.shotDestroyed(true);
 						bulletStorage.remove(bullet);
 						noShot = bullet;
-						Score = Score + 150;
+						Score = Score + 100;
+						updateScore();
 
 					}
 				}
@@ -505,9 +411,12 @@ public class Scenes extends Main{
 			
 			// checks for collision between slow asteroid and player
 			if(player.isDead() == false) {
+			
 			for (Asteroid asteroid : asteroidListSlow) {
+
 				if (player.getGraphic().getBoundsInParent().intersects
 						(asteroid.getGraphic().getBoundsInParent())&& !asteroid.getDestroyed()) {
+					System.out.println("w");
 					player.setDead(true);
 					updatePlayerStatus();
 				}
@@ -517,13 +426,13 @@ public class Scenes extends Main{
 			for (Asteroid asteroid : asteroidListFast) {
 				if (player.getGraphic().getBoundsInParent().intersects 
 						(asteroid.getGraphic().getBoundsInParent())&& !asteroid.getDestroyed()) {
+					System.out.println("w");
 					player.setDead(true);
 					updatePlayerStatus();
-					
+								
 				}
-				
-			}
 			
+				}
 			}
 		}
 	}
@@ -540,6 +449,11 @@ public class Scenes extends Main{
 			window.show();
 		}
 	
+	}
+	
+	public void updateScore() {
+		
+		scoreLabel.setText("Score: " + Score);
 	}
 		
 	
