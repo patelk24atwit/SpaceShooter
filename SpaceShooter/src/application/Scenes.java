@@ -51,9 +51,6 @@ public class Scenes extends Main{
 	private static int width = 800;
 	private static int height = 600;
 	public boolean play = false;
-	public boolean Ind_One = false;
-	public boolean Ind_two = false;
-	public boolean Ind_tre = false;
 	public Label scoreLabel = new Label("Score: 0");
 	public int Score = 0;
 	public ImageView view = new ImageView("game.jpg"); 
@@ -164,6 +161,7 @@ public class Scenes extends Main{
 						}
 						
 						collisionDetect();
+						
 
 					}
 					
