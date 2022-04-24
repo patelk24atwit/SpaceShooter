@@ -82,8 +82,6 @@ public class Scenes extends Main{
 		
 		Pane main = new Pane();
 		main.setPrefSize(width, height);
-		Image image = new Image("gear.png", 24, 24, true, true);
-		ImageView geaUrl = new ImageView(image);
 		Image keyinstruction = new Image("instructions.png", 480, 131, true, true);
 		ImageView keyinstructions = new ImageView(keyinstruction);
 		
@@ -106,23 +104,6 @@ public class Scenes extends Main{
 			);
 		
 		visiblePause.play();
-		// gear button
-//	    gea.setContentDisplay(ContentDisplay.TOP);
-//		gea.setStyle("-fx-background-radius: 10px;"
-//				+ "-fx-background-color: white;");
-//		gea.setPrefHeight(50);
-//		gea.setPrefWidth(50);
-//		gea.setLayoutX(460);
-//		gea.setLayoutY(300);
-//		gea.setGraphic(geaUrl);
-//		
-//		gea.setOnAction(e -> {
-//			Scene MenuScene = Menu();
-//			window.setScene(MenuScene);
-//			window.setTitle("Settings");
-//			window.show();
-//		});
-		
 		
 		//Start Button
 		sta.setText("Start");
@@ -156,7 +137,7 @@ public class Scenes extends Main{
 		scoreLabel.setStyle("-fx-font: 15px Lucida-Fax;"
 				+ "-fx-text-fill: white;");
 		
-		main.getChildren().addAll(view2, player.getGraphic(), scoreLabel);
+		main.getChildren().addAll(view2, player.getGraphic());
 		
 		/////////////////////////////////////////////////////////////////////////////////// EVENTHANDLER
 		
@@ -186,6 +167,8 @@ public class Scenes extends Main{
 
 					}
 					
+
+					
 				}
 			};
 			
@@ -194,6 +177,7 @@ public class Scenes extends Main{
 				
 				@Override
 				public void handle(ActionEvent arg0) {
+					
 					Asteroid ast = new Asteroid();
 
 					if(player.isDead() == false) {
@@ -262,69 +246,6 @@ public class Scenes extends Main{
 			main.getChildren().add(bullet.getGraphic());
 		}
 	
-	//Menu Scene
-//	public Scene Menu () {
-//		
-//		Pane main = new Pane();
-//		main.setPrefSize(width, height);
-//		main.setStyle("-fx-background-color: white;");
-//		Button pla = new Button();
-//		Button bac = new Button();
-//		
-//
-//		
-//		//Play/Pause
-//		pla.setPrefHeight(75);
-//		pla.setPrefWidth(100);
-//		pla.setLayoutX(350);
-//		pla.setLayoutY(100);
-//		
-//		if(play == true) {
-//			pla.setText("ON");
-//		}
-//		else {
-//			pla.setText("OFF");
-//		}
-//		
-//		pla.setOnAction(e -> {
-//			if(play == true) {
-//				
-//				play = false;
-//				pla.setText("OFF");
-//			}
-//			else {
-//				
-//				play = true;
-//				pla.setText("ON");
-//				playMusic();
-//				
-//			}
-//		});
-//		
-//		//Back button
-//		bac.setText("Back");
-//		bac.setLayoutX(690);
-//		bac.setLayoutY(540);
-//		bac.setPrefHeight(50);
-//		bac.setPrefWidth(100);
-//		bac.setStyle("-fx-background-color: white;"
-//				+ "-fx-font: 15px Lucida-Fax;"
-//				+ "-fx-background-radius: 5px;");
-//		
-//		bac.setOnAction(e -> {
-//			
-//			Scene newScene = Main();
-//			window.setScene(newScene);
-//			window.setTitle("Start");
-//			window.show();
-//		
-//			
-//		});
-//		
-//		main.getChildren().addAll(view2, pla, bac);
-//		Scene scene = new Scene(main);
-//		return scene;
-//	}
 	
 	public Scene EndScene () {
 		
@@ -345,25 +266,7 @@ public class Scenes extends Main{
 		
 	}
 	
-//	////////////////////////////////////////////////////// MEDIA PLAYER
-//	public void playMusic () {
-//		try {
-//			
-//			File music = new File("./music.wav");
-//			AudioInputStream audios = AudioSystem.getAudioInputStream(music);
-//			Clip clip = AudioSystem.getClip();
-//			clip.open(audios);
-//			clip.start();
-//			
-//		    Thread.sleep(500);
-//		    
-//		    audios.close();
-//		    
-//		}
-//		catch (Exception e) {
-//			System.out.print("error Line 267 scenes class");
-//		}
-//	}
+
 //	
 	////////////////////////////////// COLLISION DETECTION METHOD
 	public void collisionDetect() {
@@ -410,7 +313,6 @@ public class Scenes extends Main{
 			}
 			
 			// checks for collision between slow asteroid and player
-			if(player.isDead() == false) {
 			
 			for (Asteroid asteroid : asteroidListSlow) {
 
@@ -432,7 +334,6 @@ public class Scenes extends Main{
 								
 				}
 			
-				}
 			}
 		}
 	}
